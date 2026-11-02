@@ -64,8 +64,8 @@ metric = "filter.cutoff"
 operator = "eq"
 required = false
 [targets.limit]
-value = 600.0
-unit = "kHz"
+value = 3.4
+unit = "MHz"
 
 [tools.librelane]
 density = 0.45

@@ -27,8 +27,8 @@ VREF = 1.8
 LSB = VREF / 256
 TSTEP = 20e-9
 RTH = 10e3    # R-2R ladder Thevenin R (exact for the ideal ladder)
-RF = 2.7e3    # must match rc_filter.spice defaults
-CF = 100e-12
+RF = 1e3      # must match rc_filter.spice defaults
+CF = 47e-12
 
 
 def reference(t):

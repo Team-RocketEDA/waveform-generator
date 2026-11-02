@@ -1,7 +1,7 @@
 * rc_filter.spice — first-order RC reconstruction filter (spice_block).
-* Series R + shunt C. fc = 1/(2*pi*R*C) ~ 589 kHz with defaults: deliberately
-* light — passes the ~195 kHz fundamental (50 MHz update / 256) with minimal
-* delay (~270 ns group delay) while crushing 50 MHz staircase steps ~85x away.
+* Series R + shunt C. fc = 1/(2*pi*R*C) ~ 3.4 MHz with defaults: just enough
+* smoothing — passes the ~195 kHz fundamental (50 MHz update / 256) with ~3 deg
+* phase shift and ~50 ns delay, while the 50 MHz steps sit ~15x away.
 * Ideal R/C in this revision; sky130 revision maps
 * R to nplus/poly resistor and C to mimcap/moscap with extracted parasitics.
 * Buffer op-amp is FUTURE IP (user-offered); DAC currently drives RC directly.
@@ -10,7 +10,7 @@
 * Models.spice state: provided (ngspice, subcircuit rc_filter).
 
 .subckt rc_filter vin vout vgnd
-.param Rfilt=2.7k Cfilt=100p
+.param Rfilt=1k Cfilt=47p
 R1 vin vout {Rfilt}
 C1 vout vgnd {Cfilt}
 .ends rc_filter
