@@ -1,6 +1,6 @@
 samples=52738 used=52716 masked=22 (1 multi-bit edges)
-max|vdac-ref|=0.2141 LSB @1.200 us
-max|vfilt-ref|=0.0128 LSB @5.059 us
-top residuals (us): 1.200, 0.980, 1.960
-tau_chase=1.270 us vs step 20 ns (codes resolve at DC only)
+max|vdac-ref|=0.0925 LSB @0.600 us
+max|vfilt-ref|=0.0445 LSB @5.041 us
+top residuals (us): 0.600, 0.300, 0.980
+tau_chase=0.517 us vs step 20 ns (codes resolve at DC only)
 VERDICT: PASS (SPICE matches intended network < 1 LSB)
