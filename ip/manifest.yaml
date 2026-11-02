@@ -1,0 +1,4 @@
+# ip/manifest.yaml — CONTRACT STUB. Reusable-block registry.
+# First candidate graduate: r2r_dac8 (after DNL/INL PASS + reuse in a second
+# design without reopening internals). Buffer op-amp IP lands here when built.
+blocks: []

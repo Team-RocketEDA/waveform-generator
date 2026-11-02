@@ -1,0 +1,8 @@
+# workflows/analog.yaml — CONTRACT STUB. Engine task bindings for the analog flow.
+workflow: workflow.analog
+target: wave_top
+steps:
+  - task: simulate.spice     # make tran  (ngspice, ideal switches)
+  - task: characterize.circuit  # make dnl (DC sweep -> DNL/INL verdict)
+  - task: generate.views     # FUTURE: gdsfactory abstract R/C cells job
+  - task: check.lvs          # FUTURE: netgen vs drawn layout (needs devices)

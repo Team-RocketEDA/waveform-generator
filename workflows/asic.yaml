@@ -1,0 +1,12 @@
+# workflows/asic.yaml — CONTRACT STUB. Engine task bindings for the digital flow.
+# No runner reads this yet; it pins which engine tasks each make target must
+# eventually invoke so bodies stay taxonomy-compatible.
+workflow: workflow.asic
+target: waveform_gen
+steps:
+  - task: check.syntax      # yosys/iverilog lint of design/digital/
+  - task: simulate.hdl      # make rtl
+  - task: synthesize.hdl    # yosys -> netlist
+  - task: implement.asic    # LibreLane -> exports/waveform_gen.gds
+  - task: check.drc         # klayout/magic DRC on the macro
+  - task: export.design     # screenshot -> exports/gds_shot.png
