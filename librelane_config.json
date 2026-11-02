@@ -1,0 +1,21 @@
+{
+  "meta": {"version": 1, "flow": "Classic"},
+  "DESIGN_NAME": "waveform_gen",
+  "VERILOG_FILES": [
+    "design/digital/waveform_gen.v",
+    "design/digital/sine_rom.v"
+  ],
+  "CLOCK_PORT": "clk",
+  "CLOCK_PERIOD": 20.0,
+  "LIB": {
+    "*_tt_025C_1v80": [
+      "/home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib"
+    ],
+    "*_ss_100C_1v60": [
+      "/home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ss_100C_1v60.lib"
+    ],
+    "*_ff_n40C_1v95": [
+      "/home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__ff_n40C_1v95.lib"
+    ]
+  }
+}

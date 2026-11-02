@@ -1,0 +1,22 @@
+# synth_yosys.ys — cheap synthesis smoke for waveform_gen (sky130_fd_sc_hd).
+# Run from waveform-generator/ so design/digital/sine_lut.hex resolves:
+#   yosys -l results/synth.log scripts/synth_yosys.ys
+# Liberty path comes from /home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib (tt_025C_1v80). Outputs a mapped
+# netlist (results/synth_netlist.v) + area report on stdout. This is the
+# pre-LibreLane gate: if mapping fails here, the full flow will too.
+read_verilog design/digital/waveform_gen.v
+hierarchy -check -top waveform_gen
+proc
+opt
+fsm
+opt
+memory
+opt
+techmap
+opt
+dfflibmap -liberty /home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+abc -liberty /home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
+clean
+splitnets -ports
+write_verilog -noattr results/synth_netlist.v
+stat -liberty /home/alrida-ismail/.local/share/pdk/sky130A/libs.ref/sky130_fd_sc_hd/lib/sky130_fd_sc_hd__tt_025C_1v80.lib
