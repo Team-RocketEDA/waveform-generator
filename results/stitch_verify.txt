@@ -1,0 +1,2 @@
+checked 8 nets against macro metal; suspects=0
+VERDICT: PASS (no shorts/spacing)
