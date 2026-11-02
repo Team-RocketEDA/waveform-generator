@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "70000f16-2adc-40b6-9b83-4aa557041282",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-wave-top-20261103-0315/candidate.json",
+  "output": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.html",
+  "specification": {
+    "sha256": "c386c842e76f2e36a77c50f5f8d080ee31c510870b526e8e6d7dbee6b1c27a25",
+    "bytes": 4524
+  },
+  "artifact": {
+    "sha256": "d42eda287a6a666ef3d51a21efe6c606a36dac5647c96cfe3b8b4fff9969a9f5",
+    "bytes": 853620
+  }
+}

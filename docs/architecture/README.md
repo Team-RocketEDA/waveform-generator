@@ -1,4 +1,11 @@
-# docs/architecture/ — board contract (archify candidate planned, body later).
+# docs/architecture/ — inspectable block boards (archify, gates pass; browser-check skipped: no Chrome on this box).
+
+- [Top: LUT -> R-2R -> LPF](wave-top.html) — the three stages as separate blocks with bus widths.
+- [Stage 1: digital LUT](stage1.html) — phase acc, sine ROM, saw/tri fold, mode mux.
+- [Stage 2: R-2R DAC](stage2.html) — switches, shunts, series chain, termination.
+- [Stage 3: RC filter](stage3.html) — series R, shunt C, vfilt out.
+
+Candidates live in `.archify/` (re-finalize from there). Evidence pins `--repo-root` + commit `f51d2d5`.
 
 ## L0: wave_top (LUT -> R-2R -> RC)
 

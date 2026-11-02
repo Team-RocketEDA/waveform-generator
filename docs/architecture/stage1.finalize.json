@@ -1,0 +1,512 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "startedAt": "2026-11-02T23:15:09.918Z",
+  "specification": {
+    "path": "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-stage1-20261103-0315/candidate.json",
+    "sha256": "5e0a81def1853e0c255c4f39169779ce4b6b954f9963466cbb11a34c22557904",
+    "bytes": 3588
+  },
+  "artifact": {
+    "path": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+    "sha256": "af42c1eb377fc22c7a855fc6de1639ebaacb9894bca939c3564b078a30f35409",
+    "bytes": 848709
+  },
+  "stages": {
+    "validate": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": null,
+      "execution": "embedded-in-deliver",
+      "command": [
+        "/home/alrida-ismail/.nvm/versions/node/v24.22.1/bin/node",
+        "/home/alrida-ismail/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-stage1-20261103-0315/candidate.json",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": true,
+        "command": "validate",
+        "specification": {
+          "sha256": "5e0a81def1853e0c255c4f39169779ce4b6b954f9963466cbb11a34c22557904",
+          "bytes": 3588
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        }
+      }
+    },
+    "deliver": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 408,
+      "command": [
+        "/home/alrida-ismail/.nvm/versions/node/v24.22.1/bin/node",
+        "/home/alrida-ismail/.agents/skills/archify/bin/archify.mjs",
+        "deliver",
+        "architecture",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-stage1-20261103-0315/candidate.json",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "--quality",
+        "showcase",
+        "--repo-root",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator",
+        "--json"
+      ],
+      "receipt": {
+        "schemaVersion": 1,
+        "receiptId": "5490cb5b-9002-44e3-a5af-84f7791cc573",
+        "ok": true,
+        "command": "deliver",
+        "type": "architecture",
+        "input": "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-stage1-20261103-0315/candidate.json",
+        "output": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "specification": {
+          "sha256": "5e0a81def1853e0c255c4f39169779ce4b6b954f9963466cbb11a34c22557904",
+          "bytes": 3588
+        },
+        "artifact": {
+          "sha256": "af42c1eb377fc22c7a855fc6de1639ebaacb9894bca939c3564b078a30f35409",
+          "bytes": 848709
+        },
+        "validation": {
+          "checksPassed": 9,
+          "checkCount": 9,
+          "compositionProfile": "showcase",
+          "compositionStatus": "pass",
+          "errors": 0,
+          "warnings": 0
+        },
+        "evidence": {
+          "verified": true,
+          "repository": "https://github.com/Team-RocketEDA/waveform-generator",
+          "revision": "f51d2d5c31789bff355d23ade306d9b6758e7fa2",
+          "references": 9
+        },
+        "update": {
+          "status": "unavailable",
+          "installedVersion": null,
+          "availableVersion": null,
+          "releaseNotes": null,
+          "checkedAt": null,
+          "source": null,
+          "noticeRequired": false,
+          "noticeText": null,
+          "reason": "disabled"
+        }
+      }
+    },
+    "check": {
+      "status": "pass",
+      "exitCode": 0,
+      "durationMs": 209,
+      "command": [
+        "/home/alrida-ismail/.nvm/versions/node/v24.22.1/bin/node",
+        "/home/alrida-ismail/.agents/skills/archify/bin/archify.mjs",
+        "check",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "--require-provenance"
+      ],
+      "receipt": {
+        "ok": true,
+        "file": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "artifact": {
+          "sha256": "af42c1eb377fc22c7a855fc6de1639ebaacb9894bca939c3564b078a30f35409",
+          "bytes": 848709
+        },
+        "checks": [
+          {
+            "name": "single_svg",
+            "ok": true,
+            "details": [
+              "found 1 <svg> block(s)"
+            ]
+          },
+          {
+            "name": "finite_svg",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "orthogonal_arrows",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "label_route_clearance",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_crossings",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "relationship_corridors",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "container_border_runs",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "route_rhythm",
+            "ok": true,
+            "details": []
+          },
+          {
+            "name": "legend_clearance",
+            "ok": true,
+            "details": []
+          }
+        ],
+        "composition": {
+          "schemaVersion": 1,
+          "profile": "showcase",
+          "status": "pass",
+          "summary": {
+            "errors": 0,
+            "warnings": 0
+          },
+          "metrics": {
+            "properCrossings": 0,
+            "resolvedCrossovers": 3,
+            "ambiguousCorridors": 0,
+            "arrowheadCollisions": 0,
+            "containerBorderRuns": 0,
+            "labelRouteClearanceIssues": 0,
+            "labelCanvasOverflowIssues": 0,
+            "minLabelRouteClearance": 7,
+            "desktopReadabilityIssues": 0,
+            "viewportHeightIssues": 0,
+            "minProjectedNodeTextPx": 8,
+            "maxBends": 6,
+            "routesOverSuggestedBends": 3,
+            "maxStretch": 2.301,
+            "routesOverSuggestedStretch": 4,
+            "minSegmentPx": 16,
+            "minInteriorSegmentPx": 16,
+            "shortSegmentCount": 0,
+            "shortEndpointSegmentCount": 0,
+            "shortInteriorSegmentCount": 0,
+            "microSegmentCount": 0
+          },
+          "suggestedLimits": {
+            "bendsPerRelationship": 2,
+            "stretch": 1.35,
+            "segmentPx": 16,
+            "microSegmentPx": 8
+          },
+          "routeReview": {
+            "crossings": [
+              {
+                "left": {
+                  "id": "c5",
+                  "from": "phase_acc",
+                  "to": "saw",
+                  "label": "phase",
+                  "collectionIndex": 4,
+                  "artifactIndex": 5
+                },
+                "right": {
+                  "id": "c8",
+                  "from": "tri",
+                  "to": "mode_mux",
+                  "label": "tri",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "point": [
+                  448,
+                  306
+                ]
+              },
+              {
+                "left": {
+                  "id": "c6",
+                  "from": "saw",
+                  "to": "tri",
+                  "label": "fold",
+                  "collectionIndex": 5,
+                  "artifactIndex": 6
+                },
+                "right": {
+                  "id": "c8",
+                  "from": "tri",
+                  "to": "mode_mux",
+                  "label": "tri",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "point": [
+                  567,
+                  360
+                ],
+                "sharedNode": "tri"
+              },
+              {
+                "left": {
+                  "id": "c7",
+                  "from": "saw",
+                  "to": "mode_mux",
+                  "label": "saw",
+                  "collectionIndex": 6,
+                  "artifactIndex": 7
+                },
+                "right": {
+                  "id": "c8",
+                  "from": "tri",
+                  "to": "mode_mux",
+                  "label": "tri",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "point": [
+                  462,
+                  278
+                ],
+                "sharedNode": "mode_mux"
+              }
+            ],
+            "detours": [
+              {
+                "relationship": {
+                  "id": "c2",
+                  "from": "phase_acc",
+                  "to": "mode_mux",
+                  "label": "phase 8b",
+                  "collectionIndex": 1,
+                  "artifactIndex": 2
+                },
+                "bends": 2,
+                "stretch": 1.375
+              },
+              {
+                "relationship": {
+                  "id": "c4",
+                  "from": "pins_in",
+                  "to": "mode_mux",
+                  "label": "mode/step",
+                  "collectionIndex": 3,
+                  "artifactIndex": 4
+                },
+                "bends": 4,
+                "stretch": 1.382,
+                "directCorridorBlockers": [
+                  {
+                    "id": "phase_acc",
+                    "label": "Phase accumulator",
+                    "box": [
+                      220,
+                      190,
+                      130,
+                      64
+                    ]
+                  }
+                ]
+              },
+              {
+                "relationship": {
+                  "id": "c7",
+                  "from": "saw",
+                  "to": "mode_mux",
+                  "label": "saw",
+                  "collectionIndex": 6,
+                  "artifactIndex": 7
+                },
+                "bends": 4,
+                "stretch": 1.356
+              },
+              {
+                "relationship": {
+                  "id": "c8",
+                  "from": "tri",
+                  "to": "mode_mux",
+                  "label": "tri",
+                  "collectionIndex": 7,
+                  "artifactIndex": 8
+                },
+                "bends": 6,
+                "stretch": 2.301
+              }
+            ]
+          },
+          "leadingSpace": {
+            "measured": true,
+            "emptyTopPx": 40,
+            "emptyTopRatio": 0.067,
+            "occupiedTop": 40,
+            "viewBoxTop": 0,
+            "canvasHeight": 598,
+            "typicalNodeHeight": 64,
+            "reviewSuggested": false
+          },
+          "desktopReadability": {
+            "budgetBasis": "legacy-930",
+            "readerContract": "declared-wide-v1",
+            "availableDiagramWidth": 930,
+            "actualBudgetPx": 930,
+            "limit": "legacy",
+            "requestedTargetPx": 7.5,
+            "requestedTargetMet": true,
+            "hardFloorPx": 6,
+            "hardFloorMet": true,
+            "minimumOwner": {
+              "kind": "edge",
+              "id": "c1",
+              "from": "pins_in",
+              "to": "phase_acc"
+            },
+            "minimumSourceTextPx": 8,
+            "minimumProjectedTextPx": 8,
+            "semanticTextCount": 29
+          },
+          "issues": []
+        },
+        "provenance": "current",
+        "deliveryReceiptId": "5490cb5b-9002-44e3-a5af-84f7791cc573"
+      }
+    },
+    "browser-check": {
+      "status": "skipped",
+      "exitCode": 2,
+      "durationMs": 19,
+      "command": [
+        "/home/alrida-ismail/.nvm/versions/node/v24.22.1/bin/node",
+        "/home/alrida-ismail/.agents/skills/archify/bin/archify.mjs",
+        "browser-check",
+        "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+        "--json",
+        "--require-provenance"
+      ],
+      "execution": "in-process",
+      "receipt": {
+        "schemaVersion": 1,
+        "ok": false,
+        "command": "browser-check",
+        "evidenceKind": "automated-browser",
+        "status": "skipped",
+        "visualReview": "not-requested",
+        "provenance": "current",
+        "deliveryReceiptId": "5490cb5b-9002-44e3-a5af-84f7791cc573",
+        "artifact": {
+          "path": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html",
+          "sha256": "af42c1eb377fc22c7a855fc6de1639ebaacb9894bca939c3564b078a30f35409",
+          "bytes": 848709
+        },
+        "state": {
+          "detail": "read",
+          "motion": "still"
+        },
+        "chrome": {
+          "status": "unavailable",
+          "executable": null
+        },
+        "diagnostics": [
+          {
+            "code": "viewer/chrome-unavailable",
+            "severity": "warning",
+            "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+            "subject": {
+              "artifact": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html"
+            },
+            "evidence": {
+              "executable": null
+            },
+            "supportedFixes": [
+              "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+            ]
+          }
+        ],
+        "containment": {
+          "status": "skipped",
+          "policy": "fit-or-reader-declared-readable-vertical-scroll",
+          "viewports": []
+        },
+        "themeStates": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "readability": {
+          "status": "skipped",
+          "minimumProjectedNodeTextPx": 6,
+          "viewports": []
+        },
+        "viewerChrome": {
+          "status": "skipped",
+          "viewports": []
+        },
+        "captures": {
+          "status": "not-requested",
+          "screenshots": [],
+          "contactSheet": null
+        },
+        "sidecars": {
+          "receipt": "stage1.browser-check.json",
+          "files": []
+        },
+        "error": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path."
+      }
+    }
+  },
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  },
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+      ]
+    }
+  ],
+  "evidence": {
+    "receipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.finalize.json",
+    "summaryReceipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.finalize-summary.json",
+    "browserCheckReceipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage1.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "failedStage": "browser-check",
+  "finishedAt": "2026-11-02T23:15:10.651Z",
+  "durationMs": 732,
+  "update": {
+    "status": "unavailable",
+    "installedVersion": null,
+    "availableVersion": null,
+    "releaseNotes": null,
+    "checkedAt": null,
+    "source": null,
+    "noticeRequired": false,
+    "noticeText": null,
+    "reason": "cache-unavailable"
+  }
+}

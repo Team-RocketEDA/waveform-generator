@@ -1,0 +1,57 @@
+{
+  "schemaVersion": 1,
+  "ok": false,
+  "command": "finalize",
+  "status": "skipped",
+  "type": "architecture",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-wave-top-20261103-0315/candidate.json",
+    "sha256": "c386c842e76f2e36a77c50f5f8d080ee31c510870b526e8e6d7dbee6b1c27a25",
+    "bytes": 4524
+  },
+  "artifact": {
+    "path": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.html",
+    "sha256": "d42eda287a6a666ef3d51a21efe6c606a36dac5647c96cfe3b8b4fff9969a9f5",
+    "bytes": 853620
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "skipped"
+  },
+  "failedStage": "browser-check",
+  "diagnostics": [
+    {
+      "code": "viewer/chrome-unavailable",
+      "severity": "warning",
+      "message": "No supported browser found. Install Chrome/Chromium (or Microsoft Edge), or set ARCHIFY_CHROME to its executable path.",
+      "subject": {
+        "artifact": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.html"
+      },
+      "evidence": {
+        "executable": null
+      },
+      "supportedFixes": [
+        "set ARCHIFY_CHROME to a Chrome/Chromium executable (or Microsoft Edge) and rerun browser-check"
+      ]
+    }
+  ],
+  "diagnosticSummary": {
+    "total": 1,
+    "shown": 1,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.finalize.json",
+    "summaryReceipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.finalize-summary.json",
+    "browserCheckReceipt": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/wave-top.browser-check.json"
+  },
+  "visualReview": "not-requested",
+  "durationMs": 729,
+  "browserCheck": {
+    "requested": true,
+    "ran": false
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "d806e037-5c2d-4185-ae33-026739203246",
+  "status": "current",
+  "command": "deliver",
+  "type": "architecture",
+  "input": "/home/alrida-ismail/github/rocketEDA/waveform-generator/.archify/architecture-stage2-20261103-0315/candidate.json",
+  "output": "/home/alrida-ismail/github/rocketEDA/waveform-generator/docs/architecture/stage2.html",
+  "specification": {
+    "sha256": "c90fa84acdae410d7bd9c9221fed16180035c1575be4c9a686739424bfa9511e",
+    "bytes": 2647
+  },
+  "artifact": {
+    "sha256": "fcc9fb4e2536b300115739031a99b8d92cd40751f4651b042010101731566683",
+    "bytes": 839089
+  }
+}
