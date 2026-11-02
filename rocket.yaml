@@ -1,0 +1,48 @@
+# rocket.yaml — project manifest (source of truth for blocks, PDKs, domains).
+# Follows PRD illustrative tree + engine component types (hdl_component,
+# spice_block, assembly, testbench). IDs are stable; revisions advance per edit.
+project:
+  id: waveform-generator
+  revision: r0
+  description: 8-bit programmable waveform generator (LUT -> R-2R DAC -> RC filter)
+
+pdks:
+  - scope: pdk
+    id: sky130A
+    revision: r1
+
+domains: [digital, analog]
+
+blocks:
+  - name: waveform_gen
+    component_type: hdl_component
+    domains: [digital]
+    top: waveform_gen
+    sources: [design/digital/waveform_gen.v, design/digital/sine_rom.v, design/digital/sine_lut.hex]
+  - name: r2r_dac8
+    component_type: spice_block
+    domains: [analog]
+    sources: [design/analog/r2r_dac8.spice]
+  - name: rc_filter
+    component_type: spice_block
+    domains: [analog]
+    sources: [design/analog/rc_filter.spice]
+  - name: wave_top
+    component_type: assembly
+    domains: [digital, analog]
+    sources: [design/analog/wave_top.spice]
+    children: [waveform_gen, r2r_dac8, rc_filter]
+
+testbenches:
+  - name: tb_waveform_gen
+    type: hdl
+    sources: [tests/tb_waveform_gen.v]
+    dut: waveform_gen
+
+# PDK checkout on this machine: ~/.local/share/pdk/sky130A
+# (libs.ref/sky130_fd_pr, libs.tech/{magic,klayout,netgen,ngspice}).
+# Engine PDK-store resolution replaces this path when wrapped.
+
+policy:
+  max_iterations: 100
+  ask_human_after: 50

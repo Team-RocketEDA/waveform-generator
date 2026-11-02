@@ -218,3 +218,20 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# waveform-generator EDA exhaust
+results/tb_wave
+results/*.vcd
+results/codes_*.txt
+results/tran_*.txt
+results/tran_*.log
+results/tb_tran_*.spice
+results/dc_tmp.spice
+results/dc_tmp.log
+results/dc_sweep.txt
+results/dnl_inl.txt
+results/*.png
+exports/*.gds
+exports/*.oas
+exports/*.log
+sine_lut.hex

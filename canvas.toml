@@ -1,0 +1,94 @@
+# canvas.toml — constraints-first design intent (I28 run ingredient).
+# Parsed form must satisfy engine v1 CanvasConfig: schema/hdl/pdks/targets/tools.
+# Demo goals: 50 MHz update (fast sims, impressive number), light RC that just
+# smooths (~590 kHz vs ~195 kHz fundamental), DNL/INL <= 1 LSB, GDS screenshot.
+schema = "rocketeda/canvas/v1"
+
+[hdl]
+language = "verilog"
+top = "waveform_gen"
+
+[technology]
+scope = "pdk"
+id = "sky130A"
+revision = "r1"
+
+[[pdks]]
+scope = "pdk"
+id = "sky130A"
+revision = "r1"
+
+# Design targets (metric/operator/value+unit/required).
+[[targets]]
+metric = "clock.frequency"
+operator = "ge"
+required = true
+[targets.limit]
+value = 50.0
+unit = "MHz"
+
+[[targets]]
+metric = "supply.voltage"
+operator = "eq"
+required = true
+[targets.limit]
+value = 1.8
+unit = "V"
+
+[[targets]]
+metric = "dac.resolution"
+operator = "eq"
+required = true
+[targets.limit]
+value = 8.0
+unit = "bit"
+
+[[targets]]
+metric = "dac.dnl"
+operator = "le"
+required = true
+[targets.limit]
+value = 1.0
+unit = "LSB"
+
+[[targets]]
+metric = "dac.inl"
+operator = "le"
+required = true
+[targets.limit]
+value = 1.0
+unit = "LSB"
+
+[[targets]]
+metric = "filter.cutoff"
+operator = "eq"
+required = false
+[targets.limit]
+value = 600.0
+unit = "kHz"
+
+[tools.librelane]
+density = 0.45
+effort = "standard"
+[tools.librelane.profile]
+scope = "engine"
+id = "librelane-profile"
+revision = "r1"
+
+[tools.yosys]
+[tools.yosys.profile]
+scope = "engine"
+id = "yosys-profile"
+revision = "r1"
+
+[tools.ngspice]
+[tools.ngspice.profile]
+scope = "engine"
+id = "ngspice-profile"
+revision = "r1"
+
+[tools.openroad]
+[tools.openroad.profile]
+scope = "engine"
+id = "openroad-profile"
+revision = "r1"
