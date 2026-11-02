@@ -235,3 +235,6 @@ exports/*.gds
 exports/*.oas
 exports/*.log
 sine_lut.hex
+
+runs/
+exports/views/
