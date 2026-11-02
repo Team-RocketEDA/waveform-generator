@@ -235,6 +235,14 @@ results/dc_tmp.log
 results/dc_sweep.txt
 results/dnl_inl.txt
 results/*.png
+results/*.ext
+results/top_lvs.spice
+results/top_pex.spice
+results/top_pex_sim.spice
+results/tb_pex.spice
+results/pex_raw.txt
+results/pex.log
+results/pexemit.log
 exports/*.gds
 exports/*.oas
 exports/*.log

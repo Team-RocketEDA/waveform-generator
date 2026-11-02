@@ -45,6 +45,21 @@ gds:
 	cp runs/wave/final/gds/waveform_gen.gds exports/waveform_gen.gds
 	cp runs/wave/final/render/waveform_gen.png exports/gds_shot.png
 
+# PEX path: extract stitch_top with parasitics, then simulate the flat
+# transistor-level netlist (results/top_pex.spice) for 24 clocks and check
+# b[7:0] against the RTL golden sine codes. Extraction itself is interactive
+# Magic (see docs/magic_stitch.md "parasitic extraction"); everything after
+# top_pex.spice exists is scripted here.
+pex: results/top_pex.spice
+	sed -e 's/\[/_/g' -e 's/\]//g' results/top_pex.spice > results/top_pex_sim.spice
+	python3 scripts/gen_pex_tb.py
+	ngspice -b -o results/pex.log results/tb_pex.spice
+	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_pex.py
+
+results/top_pex.spice:
+	@echo "missing $@: extract stitch_top in Magic (ext2spice -o, see docs/magic_stitch.md)"
+	@exit 1
+
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"
 	@exit 1
