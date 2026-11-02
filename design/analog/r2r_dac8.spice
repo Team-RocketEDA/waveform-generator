@@ -1,0 +1,35 @@
+* r2r_dac8.spice — 8-bit R-2R resistor DAC (spice_block, simulation-only).
+* Topology: series-R chain + 2R shunt per bit + 2R LSB termination to ground.
+* Bit pins b7..b0 are driven by IDEAL voltage sources (0 / VREF) in the
+* harness — i.e. ideal switches with Ron=0, no charge injection, no timing
+* skew. A transistor-level revision swaps each ideal source for a sky130
+* CMOS transmission gate + inverter (sky130_fd_pr) with matched Ron.
+* Vout = VREF * CODE / 256 (endpoint fit removes gain/offset in DNL/INL).
+* PDK: sky130A. No PDK models consumed in this revision (pure R).
+*
+* Ports (canonical): vout b7 b6 b5 b4 b3 b2 b1 b0 vref vgnd
+* Models.spice state: provided (ngspice, subcircuit r2r_dac8, terminal order
+* as above). Terminal order is part of the contract — do not reorder.
+
+.subckt r2r_dac8 vout b7 b6 b5 b4 b3 b2 b1 b0 vref vgnd
+.param Rlad=10k R2lad=20k
+* --- series chain (MSB node IS vout) ---
+R76 vout n6 {Rlad}
+R65 n6   n5 {Rlad}
+R54 n5   n4 {Rlad}
+R43 n4   n3 {Rlad}
+R32 n3   n2 {Rlad}
+R21 n2   n1 {Rlad}
+R10 n1   n0 {Rlad}
+* --- 2R shunts to ideal bit sources ---
+R2B7 vout b7 {R2lad}
+R2B6 n6   b6 {R2lad}
+R2B5 n5   b5 {R2lad}
+R2B4 n4   b4 {R2lad}
+R2B3 n3   b3 {R2lad}
+R2B2 n2   b2 {R2lad}
+R2B1 n1   b1 {R2lad}
+R2B0 n0   b0 {R2lad}
+* --- LSB termination ---
+RTERM n0 vgnd {R2lad}
+.ends r2r_dac8

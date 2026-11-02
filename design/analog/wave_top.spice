@@ -1,0 +1,18 @@
+* wave_top.spice — mixed-signal assembly netlist (NOT a testbench).
+* Hierarchy: wave_top -> r2r_dac8 + rc_filter. Digital codes arrive as ideal
+* bit voltages b7..b0 (0 / VREF); the synthesizable RTL that produces the
+* codes lives in design/digital/ and never appears in this file.
+* Analyses, sources with time behavior, and measurements live in the harness
+* (tests/ + generated results/ decks), never here. Include order matters:
+* blocks first, instances second.
+.include design/analog/r2r_dac8.spice
+.include design/analog/rc_filter.spice
+
+* Static references owned by the assembly:
+VREF vref 0 DC 1.8
+VGND vgnd 0 DC 0
+
+* Signal chain: bits -> DAC -> RC. Instance terminals follow each block's
+* canonical port order (see block headers — do not reorder).
+XDAC vdac b7 b6 b5 b4 b3 b2 b1 b0 vref vgnd r2r_dac8
+XFILT vdac vfilt vgnd rc_filter
