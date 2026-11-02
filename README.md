@@ -25,6 +25,8 @@ nice signals. PDK: sky130A. Constraints: [canvas.toml](canvas.toml).
 DONE: RTL + LUT + Icarus TB, analog blocks, RTL-driven tran at 50 MHz
 (3 modes, 5.12 us spans), DC sweep DNL/INL PASS (max 0.0001 LSB),
 SPICE-vs-model waveform agreement PASS (0.21/0.01 LSB), plots.
-Magic `lef read` confirmed for the LibreLane macro drop-in.
+GDS: waveform_gen macro taped through LibreLane (sky130A, DRC/LVS clean,
+setup +12.8 ns) — see `exports/gds_shot.png` + `exports/PROVENANCE.md`.
+STUB (contract only): archify board bodies, device-mapped ladder, final stitch.
 STUB (contract only): `scripts/synth_gds.py`, `workflows/*`,
 `docs/architecture/` board, final GDS + screenshot.

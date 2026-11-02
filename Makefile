@@ -33,8 +33,9 @@ plot:
 	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/plot_waveforms.py sine
 
 gds:
-	@echo "TODO: digital synth (LibreLane) + analog abstract cells (gdsfactory job)"
-	@exit 1
+	/tmp/llex/squashfs-root/AppRun librelane librelane_config.json --manual-pdk --pdk-root /home/alrida-ismail/.local/share/pdk -p sky130A -s sky130_fd_sc_hd --condensed --run-tag wave --save-views-to exports/views
+	cp runs/wave/final/gds/waveform_gen.gds exports/waveform_gen.gds
+	cp runs/wave/final/render/waveform_gen.png exports/gds_shot.png
 
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"
