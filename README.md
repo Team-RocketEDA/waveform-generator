@@ -27,6 +27,9 @@ DONE: RTL + LUT + Icarus TB, analog blocks, RTL-driven tran at 50 MHz
 SPICE-vs-model waveform agreement PASS (0.21/0.01 LSB), plots.
 GDS: waveform_gen macro taped through LibreLane (sky130A, DRC/LVS clean,
 setup +12.8 ns) — see `exports/gds_shot.png` + `exports/PROVENANCE.md`.
-STUB (contract only): archify board bodies, device-mapped ladder, final stitch.
+STITCH: dout->b wired to analog landing pads in Magic, DRC 0, independently
+verified — `make stitch`, `exports/stitch_shot.png`, `docs/magic_stitch.md`.
+STUB (contract only): archify board bodies, device-mapped ladder, final stitch
+against real analog geometry.
 STUB (contract only): `scripts/synth_gds.py`, `workflows/*`,
 `docs/architecture/` board, final GDS + screenshot.

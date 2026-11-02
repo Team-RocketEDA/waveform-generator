@@ -221,6 +221,10 @@ __marimo__/
 
 # waveform-generator EDA exhaust
 results/tb_wave
+results/*.mag
+results/stitch.tcl
+results/stitch.log
+results/stitched.gds
 results/*.vcd
 results/codes_*.txt
 results/tran_*.txt
