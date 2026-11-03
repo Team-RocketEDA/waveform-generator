@@ -150,6 +150,25 @@ we hit and their countermeasures:
 Self-check after opening: zero `l_s_d()` lines in the xschem console, FETs
 render as sky130 symbols (not empty boxes), `make touchcheck` passes.
 
+To adapt `./xschemrc` to your machine, only three spots ever need editing
+(everything else is install defaults — leave it alone):
+
+```tcl
+# 1. where your PDK's xschem symbols live (default: standard pdk share dir)
+set _pdk_lib $env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
+
+# 2. where THIS repo keeps its own .sym files, anchored to the rc file
+#    itself so the launch directory never matters:
+append XSCHEM_LIBRARY_PATH :[file dirname [info script]]/design/analog/xschem
+
+# 3. your private libs (optional, never edit the file for these):
+#    export XSCHEM_USER_LIBRARY_PATH=/path/to/my/libs   # auto-appended
+```
+
+Rules of thumb: never `export XSCHEM_LIBRARY_PATH` yourself (it replaces the
+defaults — append instead); never copy PDK symbols into the repo (reference,
+don't vendor); always launch from the repo root so `./xschemrc` is sourced.
+
 ### Same flow, through engine API v1
 
 If you wanted to redo everything above without touching a shell, this is what

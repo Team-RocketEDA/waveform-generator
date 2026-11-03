@@ -11,10 +11,14 @@
 if {![info exists XSCHEM_SHAREDIR]} {
   set XSCHEM_SHAREDIR /usr/local/share/xschem
 }
+# EDIT POINT 1 — where your PDK's xschem symbols live. $HOME default fits the
+# standard ~/.local/share/pdk layout; repoint this one line for other installs.
+set _pdk_lib $env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
 set XSCHEM_LIBRARY_PATH {}
 append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library/devices
 append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library
-append XSCHEM_LIBRARY_PATH :$env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
+append XSCHEM_LIBRARY_PATH :$_pdk_lib
+unset _pdk_lib
 # project-local symbols (r2r_dac8_pdk, stair_stepper_*): xschem searches the
 # library path, NOT the schematic's own directory. Anchor to this file's
 # location so it works from any launch dir, plus the launch dir itself.
