@@ -77,10 +77,14 @@ analoglay:
 
 # Embedded xschem testbench: PWL staircase replay of the RTL golden through
 # the PDK DAC (batch proof of the stimulus chain the GUI replays live).
+# Sine is the committed GUI schematic; saw is the unfitted second waveform.
 tbreplay:
-	python3 scripts/gen_tb_sch.py
-	ngspice -b -o results/tb_replay.log results/tb_wave_top.spice
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py
+	python3 scripts/gen_tb_sch.py --mode sine
+	ngspice -b -o results/tb_replay_sine.log results/tb_wave_top_sine.spice
+	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py --mode sine
+	python3 scripts/gen_tb_sch.py --mode saw
+	ngspice -b -o results/tb_replay_saw.log results/tb_wave_top_saw.spice
+	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py --mode saw
 
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"

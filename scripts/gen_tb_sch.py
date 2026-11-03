@@ -8,7 +8,7 @@ the analog path working with live ngspice plots.
 
 Outputs (never hand-edit; regenerate):
   design/analog/xschem/r2r_dac8_pdk.sym  (pins in DAC .sch file order)
-  design/analog/xschem/wave_top_tb.sch   (DAC + PWL staircase + supplies)
+  design/analog/xschem/wave_top_tb_<mode>.sch (DAC + PWL staircase + supplies)
 
 Usage: python3 scripts/gen_tb_sch.py [--mode sine|saw|tri]
 Verify: xschem -n (hierarchy must expand) + ngspice -b on the netlist,
@@ -143,7 +143,7 @@ def emit_tb(pins, seq, tables):
     # the staircase + filtered sine appear in the waves viewer.
     C("devices/code.sym", 100, -140, "name=s_note value=\""
       "* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py)\"")
-    out = SCH.parent / "wave_top_tb.sch"
+    out = SCH.parent / f"wave_top_tb_{a.mode}.sch"
     out.write_text("\n".join(L) + "\n")
     print(f"wrote {out} (mode={a.mode})")
 
@@ -166,8 +166,9 @@ def emit_deck(seq, tables):
           f".tran 100p {NCLK * TPER}",
           ".save v(vout) v(vfilt)",
           ".control", "run",
-          f"wrdata results/tb_replay.txt v(vout) v(vfilt)", ".endc", ".end"]
-    out = ROOT / "results" / "tb_wave_top.spice"
+          f"wrdata results/tb_replay_{a.mode}.txt v(vout) v(vfilt)",
+          ".endc", ".end"]
+    out = ROOT / "results" / f"tb_wave_top_{a.mode}.spice"
     out.write_text("\n".join(D) + "\n")
     print(f"wrote {out}")
 
