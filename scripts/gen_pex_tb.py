@@ -10,8 +10,11 @@ Usage: python3 scripts/gen_pex_tb.py [--mode sine|saw|tri] [--nclk N]
 Writes results/tb_pex_<mode>.spice.
 """
 import argparse
+import os
 import re
 from pathlib import Path
+
+LIB = os.environ.get("PDK_ROOT", str(Path.home() / ".local/share/pdk")) + "/sky130A/libs.tech/ngspice/sky130.lib.spice"
 
 ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "results"
@@ -35,7 +38,7 @@ assert len(codes) == 256, f"sine LUT has {len(codes)} entries"
 lines = []
 A = lines.append
 A(f"* PEX testbench: flat extracted stitch_top, {MODE} mode, step=1, {NCLK} clocks")
-A(".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt")
+A(f".lib {LIB} tt")
 A(".temp 27")
 # ngspice-42 mishandles PDK-style bracket nets (b[7]) in v() probes, so the
 # generator works on a sed-renamed copy (b[7]->b7 etc.). Regenerable scratch.

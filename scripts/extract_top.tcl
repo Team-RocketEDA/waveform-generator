@@ -6,8 +6,8 @@
 #          results/top_pex.spice (transistor-level + parasitics, for ngspice).
 # NOTE: keep this session single-shot; re-reads re-timestamp the GDS cell.
 gds readonly true
-gds read /home/alrida-ismail/github/rocketEDA/waveform-generator/runs/wave2/final/gds/waveform_gen.gds
-lef read /home/alrida-ismail/github/rocketEDA/waveform-generator/runs/wave2/final/lef/waveform_gen.lef
+gds read ../runs/wave2/final/gds/waveform_gen.gds
+lef read ../runs/wave2/final/lef/waveform_gen.lef
 load stitch_top
 extract all
 ext2spice lvs

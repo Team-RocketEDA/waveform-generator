@@ -12,7 +12,7 @@ Floorplan (um, origin at field center):
   - Pins: vout (top-left), D7..D0 + vref/vgnd/fout (bottom).
 
 Run with the isolated PCell venv (see requirements-gfsky130.txt):
-    /tmp/gfsky130/bin/python scripts/gen_analog_layout.py
+    .venv-gfsky130/bin/python scripts/gen_analog_layout.py
 Output: design/analog/gds/r2r_dac8_macro.gds
 """
 import gdsfactory as gf

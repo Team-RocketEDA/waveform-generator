@@ -9,6 +9,7 @@ Usage: python3 scripts/pdk_dac_sweep.py
 Writes results/pdk_dc.txt (raw) + results/pdk_dnl_inl.txt (verdict).
 Exits nonzero if |DNL| or |INL| exceeds 1 LSB.
 """
+import os
 import re
 import subprocess
 import sys
@@ -18,8 +19,9 @@ ROOT = Path(__file__).resolve().parent.parent
 RES = ROOT / "results"
 SCH = ROOT / "design" / "analog" / "xschem" / "r2r_dac8_pdk.sch"
 NET = ROOT / "design" / "analog" / "xschem" / "r2r_dac8_pdk.spice"
-PDKRC = "/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/xschem/xschemrc"
-LIB = "/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice"
+PDK = os.environ.get("PDK_ROOT", str(Path.home() / ".local/share/pdk")) + "/sky130A"
+PDKRC = f"{PDK}/libs.tech/xschem/xschemrc"
+LIB = f"{PDK}/libs.tech/ngspice/sky130.lib.spice"
 
 subprocess.run(
     ["xschem", "--rcfile", PDKRC, "-n", "-s", "-o", str(NET.parent) + "/",
