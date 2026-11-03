@@ -129,6 +129,29 @@ RTL · `design/analog/` SPICE + xschem + GDS · `tests/` benches ·
 `scripts/` generators · `docs/` writeups (`pex_sim.md`, `magic_stitch.md`,
 `architecture/`) · `exports/` GDS + screenshots.
 
+### Same flow, through engine API v1
+
+If you wanted to redo everything above without touching a shell, this is what
+you'd call — each row is a real `run.start` task from the v1 catalog, same
+tools underneath, same evidence out:
+
+| What we ran | Engine equivalent (`run.start`) |
+|---|---|
+| `iverilog` + `vvp` RTL sim | `simulate.hdl` (backend: icarus) |
+| ngspice `tran` on `wave_top` | `simulate.spice` (mode: `tran`, backend: ngspice) |
+| 256-code DC sweep for DNL/INL | `simulate.spice` (mode: `dc`) |
+| DNL/INL + waveform + PEX check scripts | `analyze.measurements` (numpy/matplotlib) |
+| yosys synth + LibreLane tapeout | `synthesize.hdl` → `implement.asic` (or `workflow.asic` for the whole ride) |
+| xschem schematic → netlist | `generate.netlist` (adapter: xschem) |
+| PCell R-2R + filter layout | `generate.views` (library: gdsfactory) |
+| Magic DRC | `check.drc` (adapter: magic) |
+| Netgen LVS | `check.lvs` (adapter: netgen) |
+| Magic parasitic extraction | `extract.layout` (adapter: magic) |
+| Extracted-GDS transient vs golden | `workflow.analog` (netlist → simulate → compare extracted) |
+| GDS merge + screenshot export | `export.design` (klayout/magic) |
+
+<sub>Heads-up: the engine is under active development and some API names or payload fields may change between revisions — pin your contract bundle and re-check the catalog before scripting against it.</sub>
+
 ## Conclusion
 
 The chain is proven in three independent layers — RTL simulation, foundry-
