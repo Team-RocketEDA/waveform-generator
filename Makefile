@@ -96,3 +96,11 @@ tbexpand:
 	python3 scripts/run_expanded.py --mode sine
 	python3 scripts/run_expanded.py --mode saw
 	python3 scripts/run_expanded.py --mode tri
+
+# GUI proof: netlist the same schematics with real xschem (command mode,
+# no X) and require bit-identical traces vs the flat replay oracle.
+# This is what the visitor's Simulate button runs.
+tbxschem:
+	python3 scripts/run_gui_netlist.py --mode sine
+	python3 scripts/run_gui_netlist.py --mode saw
+	python3 scripts/run_gui_netlist.py --mode tri

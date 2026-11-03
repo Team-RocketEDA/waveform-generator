@@ -228,6 +228,11 @@ def expand(top_sch):
         if sym in ("devices/code.sym", "devices/code_shown.sym"):
             v = attr(attrs, "value")
             assert v is not None, f"{sym} without value"
+            # xschem emits @value loosely: parens outside the quotes leaked
+            # into the real netlist once ('.tran ...)'), fail here instead.
+            rest = re.sub(r'".*?"', "", attrs, flags=re.DOTALL)
+            assert "(" not in rest and ")" not in rest, \
+                f"{sym} {attr(attrs, 'name')}: stray parens outside value"
             top_lines.append(f"** code {attr(attrs, 'name')}: {v}")
             top_lines.append(v)
         elif sym == "devices/vsource.sym":

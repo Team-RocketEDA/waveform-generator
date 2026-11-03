@@ -206,8 +206,11 @@ def emit_tb(pins, seq, tables):
     # visitor sees exactly what Simulate runs; the .save moved inside it.
     C("devices/code.sym", 100, -320, "name=s_lib value=\""
       ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt\"")
+    # NOTE: no stray chars after the closing quote: xschem emits @value
+    # loosely (a trailing ')' leaked into the netlist as '.tran ...)' and
+    # killed the GUI sim while batch stayed green — see run_gui_netlist.py).
     C("devices/code.sym", 100, -260, "name=s_tran value=\""
-      f".tran 100p {NCLK * TPER}\")")
+      f".tran 100p {NCLK * TPER}\"")
     C("devices/code.sym", 100, -200, "name=s_note value=\""
       f"* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py). "
       f"Ctrl+click the launcher to load wave_top_tb_{a.mode}.raw into the "

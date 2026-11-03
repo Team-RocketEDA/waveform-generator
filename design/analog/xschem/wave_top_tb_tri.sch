@@ -30,7 +30,7 @@ N 520 690 600 690 {lab=vfilt}
 C {devices/opin.sym} 520 750 0 0 {name=p_vout lab=vout}
 N 520 750 600 750 {lab=vout}
 C {devices/code.sym} 100 -320 0 0 {name=s_lib value=".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt"}
-C {devices/code.sym} 100 -260 0 0 {name=s_tran value=".tran 100p 5.12e-06")}
+C {devices/code.sym} 100 -260 0 0 {name=s_tran value=".tran 100p 5.12e-06"}
 C {devices/code.sym} 100 -200 0 0 {name=s_note value="* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py). Ctrl+click the launcher to load wave_top_tb_tri.raw into the embedded graph; batch proof (make tbexpand) reproduces results/tb_replay_tri.txt bit-identically"}
 B 2 100 1250 700 1650 {flags=graph
 x1=0
