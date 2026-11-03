@@ -52,13 +52,23 @@ gds:
 # top_pex.spice exists is scripted here.
 pex: results/top_pex.spice
 	sed -e 's/\[/_/g' -e 's/\]//g' results/top_pex.spice > results/top_pex_sim.spice
-	python3 scripts/gen_pex_tb.py
-	ngspice -b -o results/pex.log results/tb_pex.spice
+	for m in sine saw tri; do \
+	  python3 scripts/gen_pex_tb.py --mode $$m --nclk 262; \
+	  ngspice -b -o results/pex_$$m.log results/tb_pex_$$m.spice; \
+	done
 	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_pex.py
 
 results/top_pex.spice:
 	@echo "missing $@: extract stitch_top in Magic (ext2spice -o, see docs/magic_stitch.md)"
 	@exit 1
+
+# PDK ladder path: xschem schematic -> netlist -> 256-code DC sweep (DNL/INL).
+pdkdac:
+	PDK_XSCHEM_LIBRARY_PATH=/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/xschem xschem -n -o design/analog/xschem/r2r_dac8_pdk.spice -N design/analog/xschem/r2r_dac8_pdk.sch
+	python3 scripts/pdk_dac_sweep.py
+
+touchcheck:
+	python3 scripts/xschem_touchcheck.py design/analog/xschem/r2r_dac8_pdk.sch
 
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"

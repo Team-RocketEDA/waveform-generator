@@ -239,10 +239,11 @@ results/*.ext
 results/top_lvs.spice
 results/top_pex.spice
 results/top_pex_sim.spice
-results/tb_pex.spice
-results/pex_raw.txt
-results/pex.log
+results/tb_pex*.spice
+results/pex_raw*.txt
+results/pex*.log
 results/pexemit.log
+design/analog/xschem/*.spice
 exports/*.gds
 exports/*.oas
 exports/*.log
