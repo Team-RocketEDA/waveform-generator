@@ -124,6 +124,7 @@ with sky130A at `~/.local/share/pdk/sky130A`), LibreLane AppRun, Python with
 | `make analoglay` (+ Magic `drc(full)`) | analog macro GDS, DRC 0 |
 | klayout verify scripts (`verify_stitch.py`, `verify_extract.py`) | klayout-side checks: stitch geometry + 8/8 pad extraction |
 | `make pex` | extracted-GDS function, 256/256 × 3 modes |
+| open `design/analog/xschem/wave_top_tb_sine.sch`, Simulate, Add Wave | visitor demo: hierarchical R2R + stepper, watch `v(vout)`/`v(vfilt)` live |
 
 Repo map: `rocket.yaml` manifest · `canvas.toml` intent · `design/digital/`
 RTL · `design/analog/` SPICE + xschem + GDS · `tests/` benches ·
