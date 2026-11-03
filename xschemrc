@@ -1,5 +1,20 @@
 # Project-local xschem init, auto-sourced when xschem starts in this directory.
-# Puts the sky130A PDK symbol library on the search path so no shell exports
-# are needed. Appends (never replaces) so xschem's built-in devices/ library
-# and any XSCHEM_LIBRARY_PATH from the environment keep working.
-append XSCHEM_LIBRARY_PATH :/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/xschem
+# No shell exports needed; just run `xschem <sch>` from here.
+#
+# IMPORTANT: do NOT blindly `append` to XSCHEM_LIBRARY_PATH. If the variable
+# is still unset when this file runs, creating it via `append` suppresses
+# xschem's built-in defaults (its own devices/ library holding ipin, opin,
+# lab_pin) and every pin breaks while PDK symbols resolve. So: restore the
+# install defaults first when unset, then append the PDK library.
+if {![info exists XSCHEM_SHAREDIR]} {
+  set XSCHEM_SHAREDIR /usr/local/share/xschem
+}
+if {![info exists XSCHEM_LIBRARY_PATH] || $XSCHEM_LIBRARY_PATH eq ""} {
+  set XSCHEM_LIBRARY_PATH \
+    $XSCHEM_SHAREDIR/xschem_library:$XSCHEM_SHAREDIR/xschem_library/devices
+}
+set _pdk_lib $env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
+if {[lsearch -exact [split $XSCHEM_LIBRARY_PATH :] $_pdk_lib] < 0} {
+  append XSCHEM_LIBRARY_PATH :$_pdk_lib
+}
+unset _pdk_lib
