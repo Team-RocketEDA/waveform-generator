@@ -111,19 +111,28 @@ def emit_stepper(seq, tables):
     def N(x1, y1, x2, y2, lab=None):
         L.append(f"N {x1} {y1} {x2} {y2} {{{('lab=' + lab) if lab else ''}}}")
 
+    # Geometry with NO shared pin points and NO accidental touches:
+    # sources stack at pitch 140 (pins +-30 never coincide), p-rows jog to
+    # opin rows on strictly increasing x-lanes (nested jogs can't cross),
+    # m-terminals drop in the x=150 lane (left of all bodies/p-wires).
     labs = [f"b{i}" for i in range(7, -1, -1)]
     for i, lab in enumerate(labs):
-        Y = 30 + i * 60
+        YS = 100 + i * 140          # source center row
+        YO = 30 + i * 60            # opin row (matches .sym pin rows)
+        XL = 300 + i * 20           # jog lane, strictly increasing
         # plain vsource with pwl() value: the E-named vsource_pwl template
         # breaks the ngspice operating point (gmin/source stepping fail);
         # V-named PWL converges (52k-row tran proven in batch).
-        C("devices/vsource.sym", 200, Y + 30,
+        C("devices/vsource.sym", 200, YS,
           f"name=V{lab} value=\"pwl({tables[7 - i]})\"")
-        N(200, Y, 600, Y, lab)          # p -> opin stub
-        C("devices/opin.sym", 600, Y, f"name=p_{lab} lab={lab}")
-        N(200, Y + 60, 100, Y + 60)     # m -> ground spine
-    N(100, 90, 100, 510)                # ground spine
-    C("devices/gnd.sym", 100, 510, "name=g0 lab=0")
+        N(200, YS - 30, XL, YS - 30)    # p row -> jog lane
+        N(XL, YS - 30, XL, YO)          # jog down/up to opin row
+        N(XL, YO, 600, YO, lab)         # -> opin stub
+        C("devices/opin.sym", 600, YO, f"name=p_{lab} lab={lab}")
+        N(200, YS + 30, 150, YS + 30)   # m -> x=150 lane
+        N(150, YS + 30, 150, 1150)      # ... down to ground rail
+    N(100, 1150, 250, 1150)
+    C("devices/gnd.sym", 150, 1150, "name=g0 lab=0")
     out = SCH.parent / f"stair_stepper_{a.mode}.sch"
     out.write_text("\n".join(L) + "\n")
     # symbol: pins right edge, same ys, same b7..b0 order
@@ -152,27 +161,39 @@ def emit_tb(pins, seq, tables):
     def N(x1, y1, x2, y2, lab=None):
         L.append(f"N {x1} {y1} {x2} {y2} {{{('lab=' + lab) if lab else ''}}}")
 
-    # DAC macro + stepper block, pin-to-pin (both use y=30+i*60 rows)
+    # DAC macro + stepper block, pin-to-pin (both use y=30+i*60 rows).
+    # ALL dac pins sit on the symbol's LEFT edge (x=600); supplies/outputs
+    # route in the left field on private lanes (verified by expand_tb.py —
+    # an earlier rev wired them to the empty right edge and floated).
     C("r2r_dac8_pdk.sym", 600, 0, "name=XDAC")
     C(f"stair_stepper_{a.mode}.sym", 100, 0, "name=XSTEP")
     for i in range(8):
         lab = f"b{7 - i}"
         Y = inst_pin_y[lab]
         N(400, Y, 600, Y, lab)
-    # supplies (right side, clear of the macro box)
-    C("devices/vsource.sym", 1030, 510, "name=EVREF value=1.8")
-    N(900, 480, 1030, 480, "vref")
-    N(1030, 540, 1030, 900)
-    C("devices/vsource.sym", 1000, 570, "name=EVDD value=1.8")
-    N(900, 540, 1000, 540, "vpwr")
-    N(1000, 600, 1000, 900)
-    N(900, 600, 1100, 600, "vgnd")
-    N(1100, 600, 1100, 900)
-    N(1000, 900, 1100, 900)
-    C("devices/gnd.sym", 1050, 900, "name=g1 lab=0")
-    # probed outputs
-    N(900, 660, 1000, 660, "vfilt")
-    N(900, 720, 1000, 720, "vout")
+    # supplies on private left-field lanes (see note above).
+    # V-prefixed names only: E-named sources break the ngspice OP, proven.
+    # Rows come from inst_pin_y (DAC sym file order): an earlier rev used
+    # hardcoded rows 30 above the pins and floated vref/vpwr/vgnd/vfilt/vout.
+    YR, YP, YG, YF, YO = (inst_pin_y[k] for k in
+                          ("vref", "vpwr", "vgnd", "vfilt", "vout"))
+    C("devices/vsource.sym", 350, YR + 30, "name=VVR value=1.8")
+    N(350, YR, 600, YR, "vref")
+    N(350, YR + 60, 350, 950)
+    C("devices/vsource.sym", 420, YP + 30, "name=VVP value=1.8")
+    N(420, YP, 600, YP, "vpwr")
+    N(420, YP + 60, 420, 950)
+    N(600, YG, 380, YG, "vgnd")
+    N(380, YG, 380, 950)
+    # ground rail as two segments: every landing (350/380/420) is a wire
+    # ENDPOINT — the expander unions by coincidence only, so mid-rail
+    # T-junctions would silently float.
+    N(350, 950, 380, 950)
+    N(380, 950, 420, 950)
+    C("devices/gnd.sym", 350, 950, "name=g1 lab=0")
+    # probed outputs (stubs; probed, unloaded — same as the batch deck)
+    N(520, YF, 600, YF, "vfilt")
+    N(520, YO, 600, YO, "vout")
     # sim + plot directives (verbatim netlist_commands blocks)
     C("devices/code.sym", 100, -320, "name=s_lib value=\""
       ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt\"")

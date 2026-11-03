@@ -89,3 +89,10 @@ tbreplay:
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"
 	@exit 1
+
+# Hierarchical proof: the visitor tb schematics must expand to decks whose
+# traces are bit-identical to the flat replay oracle (sine/saw; tri: run).
+tbexpand:
+	python3 scripts/run_expanded.py --mode sine
+	python3 scripts/run_expanded.py --mode saw
+	python3 scripts/run_expanded.py --mode tri

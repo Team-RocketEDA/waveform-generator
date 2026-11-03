@@ -14,18 +14,19 @@ N 400 270 600 270 {lab=b3}
 N 400 330 600 330 {lab=b2}
 N 400 390 600 390 {lab=b1}
 N 400 450 600 450 {lab=b0}
-C {devices/vsource.sym} 1030 510 0 0 {name=EVREF value=1.8}
-N 900 480 1030 480 {lab=vref}
-N 1030 540 1030 900 {}
-C {devices/vsource.sym} 1000 570 0 0 {name=EVDD value=1.8}
-N 900 540 1000 540 {lab=vpwr}
-N 1000 600 1000 900 {}
-N 900 600 1100 600 {lab=vgnd}
-N 1100 600 1100 900 {}
-N 1000 900 1100 900 {}
-C {devices/gnd.sym} 1050 900 0 0 {name=g1 lab=0}
-N 900 660 1000 660 {lab=vfilt}
-N 900 720 1000 720 {lab=vout}
+C {devices/vsource.sym} 350 540 0 0 {name=VVR value=1.8}
+N 350 510 600 510 {lab=vref}
+N 350 570 350 950 {}
+C {devices/vsource.sym} 420 600 0 0 {name=VVP value=1.8}
+N 420 570 600 570 {lab=vpwr}
+N 420 630 420 950 {}
+N 600 630 380 630 {lab=vgnd}
+N 380 630 380 950 {}
+N 350 950 380 950 {}
+N 380 950 420 950 {}
+C {devices/gnd.sym} 350 950 0 0 {name=g1 lab=0}
+N 520 690 600 690 {lab=vfilt}
+N 520 750 600 750 {lab=vout}
 C {devices/code.sym} 100 -320 0 0 {name=s_lib value=".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt"}
 C {devices/code.sym} 100 -260 0 0 {name=s_tran value=".tran 100p 5.12e-06")}
 C {devices/code.sym} 100 -200 0 0 {name=s_save value=".save v(vout) v(vfilt) v(b7) v(b0)"}
