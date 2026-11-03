@@ -1,0 +1,5 @@
+# Isolated venv for analog PCell layout (NOT the engine venv: sky130 1.0.0
+# requires gdsfactory~=9.40.1, incompatible with the engine's >=9.51).
+# python3 -m venv /tmp/gfsky130 && /tmp/gfsky130/bin/pip install -r requirements-gfsky130.txt
+sky130==1.0.0
+gdsfactory~=9.40.1

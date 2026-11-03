@@ -70,6 +70,11 @@ pdkdac:
 touchcheck:
 	python3 scripts/xschem_touchcheck.py design/analog/xschem/r2r_dac8_pdk.sch
 
+# Analog PCell layout: folded R-2R + RC macro GDS (needs the isolated
+# sky130/gdsfactory venv, see requirements-gfsky130.txt).
+analoglay:
+	MPLCONFIGDIR=/tmp /tmp/gfsky130/bin/python scripts/gen_analog_layout.py
+
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"
 	@exit 1
