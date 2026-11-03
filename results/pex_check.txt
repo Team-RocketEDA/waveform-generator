@@ -1,4 +1,5 @@
-pex: extracted stitch_top (3224 FETs, 88 node caps), sine step=1
-best shift: 0 clocks, matches: 20/20 -> PASS
-sampled: 80 83 86 89 8c 90 93 96 99 9c 9f a2 a5 a8 ab ae b1 b3 b6 b9
-golden : 80 83 86 89 8c 90 93 96 99 9c 9f a2 a5 a8 ab ae b1 b3 b6 b9
+pex full-period: extracted stitch_top, step=1, 262 clocks/mode
+sine: shift -4, 256/256 -> PASS
+saw: shift -4, 256/256 -> PASS
+tri: shift -4, 256/256 -> PASS
+VERDICT: PASS

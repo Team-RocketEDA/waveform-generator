@@ -1,0 +1,3 @@
+pdk r2r: W=4 compensated-R TG-mux, tt, 256-code DC sweep
+vout(0)=0.000000 V vout(255)=1.792900 V LSB=7.0310 mV
+max|DNL|=0.2176 LSB max|INL|=0.1909 LSB -> PASS

@@ -1,0 +1,9 @@
+b0: 2 lines, interior=True, foreign=None -> OK
+b1: 2 lines, interior=True, foreign=None -> OK
+b2: 2 lines, interior=True, foreign=None -> OK
+b3: 2 lines, interior=True, foreign=None -> OK
+b4: 2 lines, interior=True, foreign=None -> OK
+b5: 2 lines, interior=True, foreign=None -> OK
+b6: 2 lines, interior=True, foreign=None -> OK
+b7: 2 lines, interior=True, foreign=None -> OK
+VERDICT: PASS (8/8 nets reach interior, all distinct)

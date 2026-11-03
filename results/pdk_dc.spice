@@ -1,0 +1,2579 @@
+* pdk DAC DC sweep: 256 codes, TG muxes, endpoint-fit DNL/INL
+.lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.temp 27
+.include design/analog/xschem/r2r_dac8_pdk.spice
+Vb0 b0 0 DC 0
+Vb1 b1 0 DC 0
+Vb2 b2 0 DC 0
+Vb3 b3 0 DC 0
+Vb4 b4 0 DC 0
+Vb5 b5 0 DC 0
+Vb6 b6 0 DC 0
+Vb7 b7 0 DC 0
+Vvref vref 0 DC 1.8
+Vvpwr vpwr 0 DC 1.8
+Vvgnd vgnd 0 DC 0
+.control
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 0 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 1 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 2 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 3 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 4 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 5 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 6 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 7 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 8 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 9 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 10 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 11 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 12 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 13 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 14 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 15 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 16 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 17 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 18 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 19 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 20 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 21 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 22 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 23 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 24 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 25 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 26 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 27 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 28 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 29 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 30 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 31 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 32 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 33 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 34 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 35 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 36 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 37 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 38 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 39 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 40 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 41 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 42 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 43 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 44 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 45 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 46 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 47 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 48 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 49 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 50 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 51 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 52 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 53 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 54 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 55 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 56 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 57 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 58 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 59 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 60 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 61 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 62 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 0.0
+op
+echo CODE 63 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 64 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 65 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 66 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 67 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 68 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 69 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 70 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 71 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 72 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 73 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 74 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 75 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 76 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 77 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 78 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 79 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 80 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 81 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 82 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 83 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 84 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 85 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 86 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 87 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 88 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 89 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 90 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 91 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 92 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 93 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 94 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 95 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 96 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 97 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 98 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 99 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 100 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 101 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 102 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 103 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 104 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 105 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 106 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 107 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 108 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 109 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 110 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 111 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 112 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 113 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 114 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 115 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 116 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 117 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 118 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 119 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 120 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 121 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 122 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 123 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 124 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 125 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 126 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 0.0
+op
+echo CODE 127 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 128 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 129 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 130 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 131 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 132 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 133 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 134 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 135 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 136 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 137 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 138 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 139 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 140 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 141 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 142 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 143 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 144 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 145 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 146 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 147 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 148 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 149 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 150 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 151 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 152 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 153 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 154 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 155 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 156 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 157 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 158 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 159 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 160 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 161 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 162 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 163 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 164 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 165 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 166 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 167 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 168 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 169 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 170 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 171 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 172 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 173 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 174 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 175 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 176 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 177 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 178 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 179 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 180 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 181 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 182 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 183 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 184 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 185 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 186 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 187 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 188 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 189 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 190 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 0.0
+alter @Vb7[dc] = 1.8
+op
+echo CODE 191 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 192 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 193 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 194 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 195 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 196 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 197 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 198 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 199 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 200 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 201 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 202 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 203 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 204 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 205 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 206 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 207 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 208 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 209 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 210 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 211 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 212 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 213 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 214 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 215 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 216 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 217 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 218 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 219 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 220 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 221 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 222 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 0.0
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 223 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 224 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 225 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 226 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 227 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 228 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 229 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 230 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 231 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 232 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 233 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 234 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 235 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 236 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 237 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 238 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 0.0
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 239 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 240 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 241 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 242 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 243 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 244 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 245 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 246 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 0.0
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 247 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 248 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 249 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 250 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 0.0
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 251 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 252 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 0.0
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 253 $&vout
+alter @Vb0[dc] = 0.0
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 254 $&vout
+alter @Vb0[dc] = 1.8
+alter @Vb1[dc] = 1.8
+alter @Vb2[dc] = 1.8
+alter @Vb3[dc] = 1.8
+alter @Vb4[dc] = 1.8
+alter @Vb5[dc] = 1.8
+alter @Vb6[dc] = 1.8
+alter @Vb7[dc] = 1.8
+op
+echo CODE 255 $&vout
+quit
+.endc
+.end

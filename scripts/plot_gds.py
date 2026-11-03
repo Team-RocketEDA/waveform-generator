@@ -22,6 +22,10 @@ def main():
     ly.read(str(gds))
     top = sys.argv[2] if len(sys.argv) > 2 else None
     cell = ly.top_cell() if top is None else ly.cell(top)
+    # Descend hierarchy: top-cell-only drawing renders macro children as
+    # empty outlines (46k shapes hide one level down in stitch_top).
+    # In-memory only; the GDS on disk is untouched.
+    cell.flatten(-1, True)
     out = Path(sys.argv[3]) if len(sys.argv) > 3 else \
         ROOT / f"results/{gds.stem}.png"
 

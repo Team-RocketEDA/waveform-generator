@@ -1,0 +1,11 @@
+* lvs_top_source.spice — structural source for stitch_top LVS.
+* Macro pin order copies runs/wave2/final/spice/waveform_gen.spice
+* (.subckt waveform_gen VGND VPWR clk dout[0..7] en mode[0] mode[1]
+* phase_out[0..7] rst_n step[0..7]); b0..b7 sit in the dout slots because
+* the stitch straps short dout[i] to b[i]. Layout side is the Magic
+* extraction (results/top_lvs.spice). Top ports match by name.
+.include runs/wave2/final/spice/waveform_gen.spice
+
+.subckt stitch_top VGND VPWR clk en mode[0] mode[1] phase_out[0] phase_out[1] phase_out[2] phase_out[3] phase_out[4] phase_out[5] phase_out[6] phase_out[7] rst_n step[0] step[1] step[2] step[3] step[4] step[5] step[6] step[7] b0 b1 b2 b3 b4 b5 b6 b7
+Xmacro VGND VPWR clk b0 b1 b2 b3 b4 b5 b6 b7 en mode[0] mode[1] phase_out[0] phase_out[1] phase_out[2] phase_out[3] phase_out[4] phase_out[5] phase_out[6] phase_out[7] rst_n step[0] step[1] step[2] step[3] step[4] step[5] step[6] step[7] waveform_gen
+.ends
