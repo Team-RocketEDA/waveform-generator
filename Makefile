@@ -1,6 +1,14 @@
 # Contract-only targets. Implemented recipes run; TODO recipes fail loudly.
 RTL_TB = results/tb_wave
 
+# Machine-specific tools. Override any of them, e.g. make stitch PDK_ROOT=/opt/pdk
+export PDK_ROOT ?= $(HOME)/.local/share/pdk
+# The engine venv, whether this repo sits beside rocket-engine or inside RocketIDE/Demos.
+ENGINE_PY ?= $(firstword $(wildcard ../rocket-engine/.venv/bin/python ../../rocket-engine/.venv/bin/python) python3)
+LIBRELANE ?= librelane
+# Isolated PCell venv, see requirements-gfsky130.txt
+GFSKY130_PY ?= .venv-gfsky130/bin/python
+
 .PHONY: rtl tran dnl waveform plot stitch gds arch help
 help:
 	@echo "rtl      - icarus TB -> results/codes_{sine,saw,tri}.txt"
@@ -28,20 +36,20 @@ dnl:
 	python3 scripts/measure_dnl_inl.py
 
 waveform:
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_waveform.py
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/check_waveform.py
 
 plot:
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/plot_waveforms.py sine
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/plot_waveforms.py sine
 
 stitch:
 	python3 scripts/gen_stitch.py
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/verify_stitch.py
-	cd results && printf 'source stitch.tcl\nquit -noprompt\n' | magic -dnull -noconsole -rcfile /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/magic/sky130A.magicrc > stitch.log 2>&1
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/verify_stitch.py
+	cd results && printf 'source stitch.tcl\nquit -noprompt\n' | magic -dnull -noconsole -rcfile $(PDK_ROOT)/sky130A/libs.tech/magic/sky130A.magicrc > stitch.log 2>&1
 	grep -a "Total DRC" results/stitch.log
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/plot_gds.py results/stitched.gds stitch_top exports/stitch_shot.png
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/plot_gds.py results/stitched.gds stitch_top exports/stitch_shot.png
 
 gds:
-	/tmp/llex/squashfs-root/AppRun librelane librelane_config.json --manual-pdk --pdk-root /home/alrida-ismail/.local/share/pdk -p sky130A -s sky130_fd_sc_hd --condensed --run-tag wave --save-views-to exports/views
+	$(LIBRELANE) librelane_config.json --manual-pdk --pdk-root $(PDK_ROOT) -p sky130A -s sky130_fd_sc_hd --condensed --run-tag wave --save-views-to exports/views
 	cp runs/wave/final/gds/waveform_gen.gds exports/waveform_gen.gds
 	cp runs/wave/final/render/waveform_gen.png exports/gds_shot.png
 
@@ -56,7 +64,7 @@ pex: results/top_pex.spice
 	  python3 scripts/gen_pex_tb.py --mode $$m --nclk 262; \
 	  ngspice -b -o results/pex_$$m.log results/tb_pex_$$m.spice; \
 	done
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_pex.py
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/check_pex.py
 
 results/top_pex.spice:
 	@echo "missing $@: extract stitch_top in Magic (ext2spice -o, see docs/magic_stitch.md)"
@@ -73,7 +81,7 @@ touchcheck:
 # Analog PCell layout: folded R-2R + RC macro GDS (needs the isolated
 # sky130/gdsfactory venv, see requirements-gfsky130.txt).
 analoglay:
-	MPLCONFIGDIR=/tmp /tmp/gfsky130/bin/python scripts/gen_analog_layout.py
+	MPLCONFIGDIR=/tmp $(GFSKY130_PY) scripts/gen_analog_layout.py
 
 # Embedded xschem testbench: PWL staircase replay of the RTL golden through
 # the PDK DAC (batch proof of the stimulus chain the GUI replays live).
@@ -81,10 +89,10 @@ analoglay:
 tbreplay:
 	python3 scripts/gen_tb_sch.py --mode sine
 	ngspice -b -o results/tb_replay_sine.log results/tb_wave_top_sine.spice
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py --mode sine
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/check_tb_replay.py --mode sine
 	python3 scripts/gen_tb_sch.py --mode saw
 	ngspice -b -o results/tb_replay_saw.log results/tb_wave_top_saw.spice
-	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py --mode saw
+	MPLCONFIGDIR=/tmp $(ENGINE_PY) scripts/check_tb_replay.py --mode saw
 
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"

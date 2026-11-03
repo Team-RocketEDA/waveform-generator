@@ -17,8 +17,11 @@ Verify: xschem -n (hierarchy must expand) + ngspice -b on the netlist,
 """
 import argparse
 import math
+import os
 import re
 from pathlib import Path
+
+LIB = os.environ.get("PDK_ROOT", str(Path.home() / ".local/share/pdk")) + "/sky130A/libs.tech/ngspice/sky130.lib.spice"
 
 ROOT = Path(__file__).resolve().parent.parent
 SCH = ROOT / "design" / "analog" / "xschem" / "r2r_dac8_pdk.sch"
@@ -205,7 +208,7 @@ def emit_tb(pins, seq, tables):
     # lives in a VISIBLE code_shown block (foundry-tb pattern) so the
     # visitor sees exactly what Simulate runs; the .save moved inside it.
     C("devices/code.sym", 100, -320, "name=s_lib value=\""
-      ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt\"")
+      f".lib {LIB} tt\"")
     # NOTE: no stray chars after the closing quote: xschem emits @value
     # loosely (a trailing ')' leaked into the netlist as '.tran ...)' and
     # killed the GUI sim while batch stayed green — see run_gui_netlist.py).
@@ -253,7 +256,7 @@ def emit_deck(seq, tables):
     sub = (ROOT / "design" / "analog" / "xschem" / "r2r_dac8_pdk.spice").read_text()
     sub = sub.replace("**.subckt", ".subckt").replace("**.ends", ".ends")
     (ROOT / "results" / "dac_subckt.spice").write_text(sub)
-    D = [".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt",
+    D = [f".lib {LIB} tt",
          ".include results/dac_subckt.spice"]
     D.append("XDAC b7 b6 b5 b4 b3 b2 b1 b0 vref vpwr 0 vfilt vout "
                "r2r_dac8_pdk")

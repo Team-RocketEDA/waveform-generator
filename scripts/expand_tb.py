@@ -15,9 +15,12 @@ Usage: python3 scripts/expand_tb.py <top.sch> <out.spice>
 Then: ngspice -b <out.spice>; the vout/vfilt traces must reproduce the
 proven flat-deck replay (see scripts/check_tb_replay.py).
 """
+import os
 import re
 import sys
 from pathlib import Path
+
+LIB = os.environ.get("PDK_ROOT", str(Path.home() / ".local/share/pdk")) + "/sky130A/libs.tech/ngspice/sky130.lib.spice"
 
 ROOT = Path(__file__).resolve().parents[1]
 XSDIR = ROOT / "design" / "analog" / "xschem"
@@ -369,7 +372,7 @@ if __name__ == "__main__":
                XSDIR / f"stair_stepper_{mode}.sch")
     sub_defs, top_lines = expand(top)
     L = ["* expanded visitor tb (strict expander, see scripts/expand_tb.py)",
-         ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt",
+         f".lib {LIB} tt",
          ".include results/dac_subckt.spice"]
     for sym, defi in sub_defs.items():
         # stepper subcircuit: rename ports b* (shared net names already match)
