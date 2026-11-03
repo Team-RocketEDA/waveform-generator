@@ -120,8 +120,9 @@ with sky130A at `~/.local/share/pdk/sky130A`), LibreLane AppRun, Python with
 | `iverilog … && vvp results/tb_wave` | RTL: 256 codes/mode vs golden |
 | `make tran && make dnl` | ideal analog: staircase + DNL/INL ≤ 1 LSB |
 | `make pdkdac` | PDK schematic → netlist → 256-code sweep (DNL 0.22/INL 0.19) |
-| `make touchcheck` | schematic has no dangling nets |
+| `make touchcheck` | xschem-side check: schematic has no dangling nets |
 | `make analoglay` (+ Magic `drc(full)`) | analog macro GDS, DRC 0 |
+| klayout verify scripts (`verify_stitch.py`, `verify_extract.py`) | klayout-side checks: stitch geometry + 8/8 pad extraction |
 | `make pex` | extracted-GDS function, 256/256 × 3 modes |
 
 Repo map: `rocket.yaml` manifest · `canvas.toml` intent · `design/digital/`
@@ -144,7 +145,9 @@ tools underneath, same evidence out:
 | yosys synth + LibreLane tapeout | `synthesize.hdl` → `implement.asic` (or `workflow.asic` for the whole ride) |
 | xschem schematic → netlist | `generate.netlist` (adapter: xschem) |
 | PCell R-2R + filter layout | `generate.views` (library: gdsfactory) |
-| Magic DRC | `check.drc` (adapter: magic) |
+| `make touchcheck` (xschem verification) | `check.erc` + `check.connectivity` (electrical rules on the schematic) |
+| klayout verify scripts (stitch + extraction) | `check.view_sync` (source vs laid-out vs extracted views, pin mappings) |
+| Magic DRC | `check.drc` (adapter: magic or klayout) |
 | Netgen LVS | `check.lvs` (adapter: netgen) |
 | Magic parasitic extraction | `extract.layout` (adapter: magic) |
 | Extracted-GDS transient vs golden | `workflow.analog` (netlist → simulate → compare extracted) |
