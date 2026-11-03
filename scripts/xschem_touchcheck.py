@@ -35,6 +35,15 @@ def parse(sch):
                     lab = lm.group(1)
             segs.append(tuple(map(float, m.groups())) + (lab,))
             i += 2
+            continue
+        # single-line form `N x1 y1 x2 y2 {lab=X}` (what gen_tb_sch.py emits)
+        m = re.match(r"^N (\S+) (\S+) (\S+) (\S+) \{(.*)\}$", lines[i])
+        if m:
+            lab = m.group(5)
+            if lab.startswith("lab="):
+                lab = lab[4:]
+            segs.append(tuple(map(float, m.groups()[:4])) + (lab,))
+            i += 1
         else:
             i += 1
     return segs

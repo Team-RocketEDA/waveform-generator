@@ -220,6 +220,10 @@ __marimo__/
 .streamlit/secrets.toml
 
 # waveform-generator EDA exhaust
+# xschem GUI sim exhaust: the embedded-graph flow writes the .raw the
+# launcher loads (plus the _gui.txt the .control writes) next to the .sch
+*.raw
+design/analog/xschem/*_gui.txt
 results/tb_wave
 results/*.mag
 results/stitch.tcl

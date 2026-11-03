@@ -29,5 +29,32 @@ N 520 690 600 690 {lab=vfilt}
 N 520 750 600 750 {lab=vout}
 C {devices/code.sym} 100 -320 0 0 {name=s_lib value=".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt"}
 C {devices/code.sym} 100 -260 0 0 {name=s_tran value=".tran 100p 5.12e-06")}
-C {devices/code.sym} 100 -200 0 0 {name=s_save value=".save v(vout) v(vfilt) v(b7) v(b0)"}
-C {devices/code.sym} 100 -140 0 0 {name=s_note value="* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py)"}
+C {devices/code.sym} 100 -200 0 0 {name=s_note value="* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py). Ctrl+click the launcher to load wave_top_tb_sine.raw into the embedded graph; batch proof (make tbexpand) reproduces results/tb_replay_sine.txt bit-identically"}
+B 2 100 1250 700 1650 {flags=graph
+x1=0
+x2=5.12e-06
+divx=5
+subdivx=1
+y1=0
+y2=1.8
+divy=5
+subdivy=1
+node=v(vout) v(vfilt)
+color=4 5
+dataset=-1}
+C {devices/code_shown.sym} 750 1250 0 0 {name=s_sim only_toplevel=true
+value="
+.control
+save v(vout) v(vfilt) v(b7) v(b0)
+run
+write wave_top_tb_sine.raw
+wrdata wave_top_tb_sine_gui.txt v(vout) v(vfilt)
+.endc
+"}
+C {devices/launcher.sym} 750 1560 0 0 {name=h1
+descr="Click left mouse button here with control key
+pressed to load/unload waveforms in graph."
+tclcommand="
+xschem raw_read $netlist_dir/[file tail [file rootname [xschem get current_name]]].raw
+"
+}

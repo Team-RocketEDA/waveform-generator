@@ -1,10 +1,15 @@
 """Strict hierarchical expander for the generated tb schematics.
 
 xschem's own batch netlister needs an X server, so this minimal expander
-covers exactly the constructs gen_tb_sch.py emits (vsource/gnd/code/opin/
-ipin + hierarchical X instances, all rot0/flip0) and FAILS LOUDLY on
+covers exactly the constructs gen_tb_sch.py emits (vsource/gnd/code/
+code_shown/opin/ipin + hierarchical X instances, all rot0/flip0; graphic
+B rects and the launcher symbol are netlist-ignored) and FAILS LOUDLY on
 anything else. Its real job is the correspondence check every hierarchical
 flow depends on: symbol pin order == subcircuit port order == parent nets.
+
+Records may span lines (native xschem: literal newlines inside {...}, e.g.
+the .control code_shown block and the graph rect), so parsing accumulates
+to brace balance instead of assuming one line per record.
 
 Usage: python3 scripts/expand_tb.py <top.sch> <out.spice>
 Then: ngspice -b <out.spice>; the vout/vfilt traces must reproduce the
@@ -22,6 +27,7 @@ DEV_PINS = {
     "devices/vsource.sym": [("p", 0, -30), ("m", 0, 30)],
     "devices/gnd.sym": [("p", 0, 0)],
     "devices/code.sym": [],
+    "devices/code_shown.sym": [],
     "devices/ipin.sym": [("p", 0, 0)],
     "devices/opin.sym": [("p", 0, 0)],
     "devices/lab_pin.sym": [("p", 0, 0)],
@@ -72,36 +78,44 @@ def join_all(uf, endpoints, segments):
                 uf.union(repr(o), repr(("wire", w)))
 
 
+def records(path):
+    """Logical records: accumulate physical lines until braces balance.
+
+    xschem stores literal newlines inside {...} (multiline code blocks,
+    graph rects, launcher tclcommands), so a record is lines-up-to-balance.
+    """
+    rec, depth = [], 0
+    for raw in open(path):
+        line = raw.rstrip("\n")
+        rec.append(line)
+        depth += line.count("{") - line.count("}")
+        assert depth >= 0, f"unbalanced braces in {path}: {line}"
+        if depth == 0 and rec != [""]:
+            yield "\n".join(rec)
+            rec = []
+    assert not rec, f"dangling record in {path}"
+
+
 def parse_sch(path):
     """Return (instances, wires): inst=(sym,x,y,attrs), wire=(x1,y1,x2,y2,lab)."""
     inst, wires = [], []
-    pending = None
-    for raw in open(path):
-        line = raw.rstrip("\n")
-        if pending is not None:
-            wires.append((*pending, line.strip().rstrip("}")))
-            pending = None
-            continue
-        m = re.match(r"C \{([^}]*)\} (\S+) (\S+) (\d) (\d) \{(.*)\}", line)
+    for rec in records(path):
+        m = re.match(r"C \{(.*?)\} (\S+) (\S+) (\d) (\d) \{(.*)\}$",
+                     rec, re.DOTALL)
         if m:
             assert (m.group(4), m.group(5)) == ("0", "0"), f"rot/flip in {path}"
             inst.append((m.group(1), float(m.group(2)), float(m.group(3)),
                          m.group(6)))
             continue
-        m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{(.*)\}", line)
+        m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{(.*)\}$", rec, re.DOTALL)
         if m:
-            if m.group(5) == "":
-                wires.append((float(m.group(1)), float(m.group(2)),
-                              float(m.group(3)), float(m.group(4)), None))
-            else:
-                wires.append((float(m.group(1)), float(m.group(2)),
-                              float(m.group(3)), float(m.group(4)),
-                              m.group(5)))
+            lab = m.group(5).replace("\n", "")
+            if lab.startswith("lab="):
+                lab = lab[4:]
+            wires.append((float(m.group(1)), float(m.group(2)),
+                          float(m.group(3)), float(m.group(4)),
+                          lab or None))
             continue
-        m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{$", line)
-        if m:
-            pending = tuple(float(m.group(i)) for i in range(1, 5))
-    assert pending is None, f"dangling wire continuation in {path}"
     return inst, wires
 
 
@@ -117,7 +131,7 @@ def sym_pins(sym_path):
 
 
 def attr(attrs, key):
-    m = re.search(key + r'="([^"]*)"', attrs)
+    m = re.search(key + r'="(.*)"', attrs, re.DOTALL)
     if m:
         return m.group(1)
     m = re.search(key + r"=(\S+)", attrs)
@@ -135,6 +149,8 @@ def expand(top_sch):
 
     defBasics = None
     for sym, x, y, attrs in inst:
+        if sym == "devices/launcher.sym":
+            continue  # GUI-only load button; not part of the netlist
         if sym in DEV_PINS:
             for pin, dx, dy in DEV_PINS[sym]:
                 endpoints.append((x + dx, y + dy, ("dev", sym, attrs, pin)))
@@ -204,9 +220,11 @@ def expand(top_sch):
     top_lines = []
     sub_defs = {}
     for sym, x, y, attrs in inst:
-        if sym == "devices/code.sym":
+        if sym == "devices/launcher.sym":
+            continue  # GUI-only: spice_ignore=true nets nothing (verified)
+        if sym in ("devices/code.sym", "devices/code_shown.sym"):
             v = attr(attrs, "value")
-            assert v is not None, "code.sym without value"
+            assert v is not None, f"{sym} without value"
             top_lines.append(f"** code {attr(attrs, 'name')}: {v}")
             top_lines.append(v)
         elif sym == "devices/vsource.sym":

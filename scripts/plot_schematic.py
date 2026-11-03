@@ -22,35 +22,49 @@ KIND = [
     ("lab_pin", "tab:purple", "L"),
     ("ipin", "black", "in"),
     ("opin", "black", "out"),
+    ("code_shown", "tab:gray", "sim"),
+    ("launcher", "tab:olive", "load"),
 ]
 
 sch, out = sys.argv[1], sys.argv[2]
-inst, wires = [], []
-pending = None  # wire record continued on the next line: `N x1 y1 x2 y2 {` + `lab=..}`
+inst, wires, graphs = [], [], []
+# records may span lines (literal newlines inside {...}); accumulate to
+# brace balance, mirroring scripts/expand_tb.py
+rec, depth = [], 0
+records = []
 for raw in open(sch):
     line = raw.rstrip("\n")
-    if pending is not None:
-        lab = line.strip().rstrip("}")
-        wires.append((*pending, lab))
-        pending = None
-        continue
-    m = re.match(r"C \{([^}]*)\} (\S+) (\S+) \d \d \{(.*)\}", line)
+    rec.append(line)
+    depth += line.count("{") - line.count("}")
+    if depth == 0 and rec != [""]:
+        records.append("\n".join(rec))
+        rec = []
+for rec in records:
+    m = re.match(r"C \{(.*?)\} (\S+) (\S+) \d \d \{(.*)\}$", rec, re.DOTALL)
     if m:
         sym, x, y, attrs = m.group(1), float(m.group(2)), float(m.group(3)), m.group(4)
         nm = re.search(r"name=(\S+)", attrs)
         inst.append((sym, x, y, nm.group(1) if nm else "?"))
         continue
-    m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{$", line)
-    if m:
-        pending = tuple(float(m.group(i)) for i in range(1, 5))
-        continue
-    m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{(.*)\}", line)
+    m = re.match(r"N (\S+) (\S+) (\S+) (\S+) \{(.*)\}$", rec, re.DOTALL)
     if m:
         wires.append(tuple(float(m.group(i)) for i in range(1, 5)) + (m.group(5),))
+        continue
+    m = re.match(r"B (\S+) (\S+) (\S+) (\S+) (\S+) \{(.*)\}$", rec, re.DOTALL)
+    if m and "flags=graph" in m.group(6):
+        nm = re.search(r"node=(.+)", m.group(6))
+        graphs.append((float(m.group(2)), float(m.group(3)), float(m.group(4)),
+                       float(m.group(5)),
+                       nm.group(1).strip().split("\n")[0] if nm else "?"))
 
 fig, ax = plt.subplots(figsize=(14, 8))
 for x1, y1, x2, y2, lab in wires:
     ax.plot([x1, x2], [-y1, -y2], color="0.45", lw=0.6)
+for x1, y1, x2, y2, nodes in graphs:
+    ax.add_patch(Rectangle((x1, -y2), x2 - x1, y2 - y1, fc="none",
+                           ec="tab:blue", lw=1.2))
+    ax.text((x1 + x2) / 2, -y2 - 18, f"graph: {nodes}", ha="center",
+            va="top", fontsize=4, color="tab:blue")
 for sym, x, y, nm in inst:
     for key, color, tag in KIND:
         if key in sym:
@@ -67,8 +81,10 @@ for sym, x, y, nm in inst:
         labm = re.search(r"lab=(\S+)", nm)
         ax.text(x, -y - 22, labm.group(1) if labm else nm, ha="center",
                 va="top", fontsize=4, color="black")
-xs = [x for _, x, _, _ in inst] + [v for w in wires for v in (w[0], w[2])]
-ys = [-y for _, _, y, _ in inst] + [-w[1] for w in wires] + [-w[3] for w in wires]
+xs = [x for _, x, _, _ in inst] + [v for w in wires for v in (w[0], w[2])] + \
+    [v for g in graphs for v in (g[0], g[2])]
+ys = [-y for _, _, y, _ in inst] + [-w[1] for w in wires] + [-w[3] for w in wires] + \
+    [-v for g in graphs for v in (g[1], g[3])]
 ax.set_xlim(min(xs) - 80, max(xs) + 80)
 ax.set_ylim(min(ys) - 80, max(ys) + 80)
 ax.set_aspect("equal")

@@ -194,18 +194,38 @@ def emit_tb(pins, seq, tables):
     # probed outputs (stubs; probed, unloaded — same as the batch deck)
     N(520, YF, 600, YF, "vfilt")
     N(520, YO, 600, YO, "vout")
-    # sim + plot directives (verbatim netlist_commands blocks)
+    # sim directives (verbatim netlist_commands blocks). The .control recipe
+    # lives in a VISIBLE code_shown block (foundry-tb pattern) so the
+    # visitor sees exactly what Simulate runs; the .save moved inside it.
     C("devices/code.sym", 100, -320, "name=s_lib value=\""
       ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt\"")
     C("devices/code.sym", 100, -260, "name=s_tran value=\""
       f".tran 100p {NCLK * TPER}\")")
-    C("devices/code.sym", 100, -200, "name=s_save value=\""
-      ".save v(vout) v(vfilt) v(b7) v(b0)\"")
-    # NOTE: analyses stay single-line (xschem-multiline is GUI-verified
-    # separately). Simulate in xschem, then Add Wave -> v(vout), v(vfilt):
-    # the staircase + filtered sine appear in the waves viewer.
-    C("devices/code.sym", 100, -140, "name=s_note value=\""
-      "* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py)\"")
+    C("devices/code.sym", 100, -200, "name=s_note value=\""
+      f"* tb: 256clk staircase replay of the RTL golden (see gen_tb_sch.py). "
+      f"Ctrl+click the launcher to load wave_top_tb_{a.mode}.raw into the "
+      f"embedded graph; batch proof (make tbexpand) reproduces "
+      f"results/tb_replay_{a.mode}.txt bit-identically\"")
+    # --- embedded plot: in-schematic graph + launcher (foundry tb pattern,
+    # cf. gf180mcu_fd_pr test_*.sch). dataset=-1 follows the loaded raw, so
+    # after Simulate the staircase + filtered wave render IN the schematic.
+    TSTOP = NCLK * TPER
+    graph = "\n".join([
+        "flags=graph", "x1=0", f"x2={TSTOP:.6g}", "divx=5", "subdivx=1",
+        "y1=0", "y2=1.8", "divy=5", "subdivy=1",
+        "node=v(vout) v(vfilt)", "color=4 5", "dataset=-1"])
+    L.append(f"B 2 100 1250 700 1650 {{{graph}}}")
+    ctl = "\n".join([
+        ".control", "save v(vout) v(vfilt) v(b7) v(b0)", "run",
+        f"write wave_top_tb_{a.mode}.raw",
+        f"wrdata wave_top_tb_{a.mode}_gui.txt v(vout) v(vfilt)", ".endc"])
+    C("devices/code_shown.sym", 750, 1250,
+      f"name=s_sim only_toplevel=true\nvalue=\"\n{ctl}\n\"")
+    C("devices/launcher.sym", 750, 1560,
+      "name=h1\ndescr=\"Click left mouse button here with control key\n"
+      "pressed to load/unload waveforms in graph.\"\ntclcommand=\"\n"
+      "xschem raw_read $netlist_dir/[file tail [file rootname "
+      "[xschem get current_name]]].raw\n\"\n")
     out = SCH.parent / f"wave_top_tb_{a.mode}.sch"
     out.write_text("\n".join(L) + "\n")
     print(f"wrote {out} (mode={a.mode})")
