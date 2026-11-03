@@ -131,6 +131,25 @@ RTL · `design/analog/` SPICE + xschem + GDS · `tests/` benches ·
 `scripts/` generators · `docs/` writeups (`pex_sim.md`, `magic_stitch.md`,
 `architecture/`) · `exports/` GDS + screenshots.
 
+### xschem bring-your-own-PDK: known path problems
+
+Schematics here resolve symbols from three places: xschem's own `devices/`
+(pins), the sky130A PDK (`sky130_fd_pr/`), and this repo (`r2r_dac8_pdk`,
+`stair_stepper_*`). The project-local `./xschemrc` assembles that path, but
+if you bring your own PDK layout or xschem install, these are the failures
+we hit and their countermeasures:
+
+| Symptom (`l_s_d(): Symbol not found`) | Cause | Fix |
+|---|---|---|
+| `devices/ipin`, `lab_pin`, … missing, PDK symbols fine | `XSCHEM_LIBRARY_PATH` exported with only the PDK dir — replaces xschem defaults | unset it; `./xschemrc` restores defaults, or append (`:…:$OLD`) instead of replacing |
+| pins missing with no exports at all | an `append` created the var before defaults installed | fixed in repo: `xschemrc` resets via the vendor recipe, then appends |
+| `sky130_fd_pr/…` missing | PDK not at `~/.local/share/pdk/sky130A` | point `./xschemrc`'s PDK line at your install, or set `XSCHEM_USER_LIBRARY_PATH` (auto-appended) |
+| `r2r_dac8_pdk`, `stair_stepper_*` missing | project syms live next to the schematics, which xschem never searches | fixed in repo: `xschemrc` anchors `design/analog/xschem` + launch dir |
+| everything missing | launched from another directory (`./xschemrc` not sourced) | launch from the repo root |
+
+Self-check after opening: zero `l_s_d()` lines in the xschem console, FETs
+render as sky130 symbols (not empty boxes), `make touchcheck` passes.
+
 ### Same flow, through engine API v1
 
 If you wanted to redo everything above without touching a shell, this is what
