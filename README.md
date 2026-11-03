@@ -126,6 +126,7 @@ with sky130A at `~/.local/share/pdk/sky130A`), LibreLane AppRun, Python with
 | `make pex` | extracted-GDS function, 256/256 × 3 modes |
 | `make tbreplay` | flat PWL replay of the RTL golden through the PDK DAC (sine/saw) |
 | `make tbexpand` | visitor tb schematics expand to decks bit-identical to the flat replay (sine/saw run + compare; tri runs) |
+| `make tbxschem` | same schematics netlisted by real xschem (command mode, no X) run bit-identical too — this is what Simulate executes |
 | open `design/analog/xschem/wave_top_tb_sine.sch`, Simulate | one button: the `.control` block runs the sweep, writes the raw/txt, and `plot`s `v(vout)`/`v(vfilt)` straight into ngspice's window — plus the embedded graph rect keeps the waves in the schematic (Ctrl+click the launcher to reload) |
 
 Repo map: `rocket.yaml` manifest · `canvas.toml` intent · `design/digital/`
@@ -186,6 +187,7 @@ tools underneath, same evidence out:
 | yosys synth + LibreLane tapeout | `synthesize.hdl` → `implement.asic` (or `workflow.asic` for the whole ride) |
 | xschem schematic → netlist | `generate.netlist` (adapter: xschem) |
 | hierarchical tb expand + replay compare (`make tbexpand`) | `generate.netlist` (hierarchical) → `simulate.spice` (tran) → `analyze.measurements` (bit-compare vs golden) |
+| xschem-native netlist + replay compare (`make tbxschem`) | `generate.netlist` (adapter: xschem) → `simulate.spice` (tran) → `analyze.measurements` (bit-compare vs golden) |
 | PCell R-2R + filter layout | `generate.views` (library: gdsfactory) |
 | `make touchcheck` (xschem verification) | `check.erc` + `check.connectivity` (electrical rules on the schematic) |
 | klayout verify scripts (stitch + extraction) | `check.view_sync` (source vs laid-out vs extracted views, pin mappings) |
