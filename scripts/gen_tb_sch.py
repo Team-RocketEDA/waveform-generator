@@ -8,7 +8,8 @@ the analog path working with live ngspice plots.
 
 Outputs (never hand-edit; regenerate):
   design/analog/xschem/r2r_dac8_pdk.sym  (pins in DAC .sch file order)
-  design/analog/xschem/wave_top_tb_<mode>.sch (DAC + PWL staircase + supplies)
+  design/analog/xschem/stair_stepper_<mode>.sch/.sym (PWL stepper block)
+  design/analog/xschem/wave_top_tb_<mode>.sch (XDAC + XSTEP + supplies)
 
 Usage: python3 scripts/gen_tb_sch.py [--mode sine|saw|tri]
 Verify: xschem -n (hierarchy must expand) + ngspice -b on the netlist,
@@ -91,9 +92,58 @@ def emit_symbol(pins):
     print(f"wrote {out} ({n} pins)")
 
 
+def _sch_head():
+    return ["v {xschem version=3.4.0 file_version=1.2}", "G {}",
+            "K {}", "V {}", "S {}", "E {}"]
+
+
+def emit_stepper(seq, tables):
+    """stair_stepper_<mode>: 8 PWL bit sources + ground, opin b7..b0.
+
+    The SPICE model of the staircase stepper as one hierarchical block.
+    opin file order (b7..b0) matches stair_stepper_<mode>.sym pin order.
+    """
+    L = _sch_head()
+
+    def C(sym, x, y, attrs):
+        L.append(f"C {{{sym}}} {x} {y} 0 0 {{{attrs}}}")
+
+    def N(x1, y1, x2, y2, lab=None):
+        L.append(f"N {x1} {y1} {x2} {y2} {{{('lab=' + lab) if lab else ''}}}")
+
+    labs = [f"b{i}" for i in range(7, -1, -1)]
+    for i, lab in enumerate(labs):
+        Y = 30 + i * 60
+        # plain vsource with pwl() value: the E-named vsource_pwl template
+        # breaks the ngspice operating point (gmin/source stepping fail);
+        # V-named PWL converges (52k-row tran proven in batch).
+        C("devices/vsource.sym", 200, Y + 30,
+          f"name=V{lab} value=\"pwl({tables[7 - i]})\"")
+        N(200, Y, 600, Y, lab)          # p -> opin stub
+        C("devices/opin.sym", 600, Y, f"name=p_{lab} lab={lab}")
+        N(200, Y + 60, 100, Y + 60)     # m -> ground spine
+    N(100, 90, 100, 510)                # ground spine
+    C("devices/gnd.sym", 100, 510, "name=g0 lab=0")
+    out = SCH.parent / f"stair_stepper_{a.mode}.sch"
+    out.write_text("\n".join(L) + "\n")
+    # symbol: pins right edge, same ys, same b7..b0 order
+    S = ["v {xschem version=3.4.0 file_version=1.2}", "G {}",
+         "K {type=subcircuit", 'format="@name @pinlist @symname"',
+         'template="name=X1"}', "V {}", "S {}", "E {}",
+         "L 4 0 0 0 510 {}", "L 4 0 510 300 510 {}",
+         "L 4 300 510 300 0 {}", "L 4 300 0 0 0 {}"]
+    for i, lab in enumerate(labs):
+        Y = 30 + i * 60
+        S.append(f"B 5 295 {Y - 5} 305 {Y + 5} {{name={lab} dir=out}}")
+    S.append("T {@symname} 150 -25 0 0 0.3 0.3 {}")
+    S.append("T {@name} 150 15 0 0 0.2 0.2 {}")
+    sout = SCH.parent / f"stair_stepper_{a.mode}.sym"
+    sout.write_text("\n".join(S) + "\n")
+    print(f"wrote {out} + {sout}")
+
+
 def emit_tb(pins, seq, tables):
-    L = ["v {xschem version=3.4.0 file_version=1.2}", "G {}",
-         "K {}", "V {}", "S {}", "E {}"]
+    L = _sch_head()
     inst_pin_y = {lab: 30 + i * 60 for i, lab in enumerate(pins)}
 
     def C(sym, x, y, attrs):
@@ -102,21 +152,13 @@ def emit_tb(pins, seq, tables):
     def N(x1, y1, x2, y2, lab=None):
         L.append(f"N {x1} {y1} {x2} {y2} {{{('lab=' + lab) if lab else ''}}}")
 
-    # DAC macro
+    # DAC macro + stepper block, pin-to-pin (both use y=30+i*60 rows)
     C("r2r_dac8_pdk.sym", 600, 0, "name=XDAC")
-    # 8 PWL staircase sources, p lands on the bit net line
+    C(f"stair_stepper_{a.mode}.sym", 100, 0, "name=XSTEP")
     for i in range(8):
         lab = f"b{7 - i}"
         Y = inst_pin_y[lab]
-        # plain vsource with pwl() value: the E-named vsource_pwl template
-        # breaks the ngspice operating point (gmin/source stepping fail);
-        # V-named PWL converges (52k-row tran proven in batch).
-        C("devices/vsource.sym", 200, Y + 30,
-          f"name=V{lab} value=\"pwl({tables[7 - i]})\"")
-        N(200, Y, 600, Y, lab)          # p -> DAC pin
-        N(200, Y + 60, 100, Y + 60)     # m -> ground spine
-    N(100, 90, 100, 510)                # ground spine
-    C("devices/gnd.sym", 100, 510, "name=g0 lab=0")
+        N(400, Y, 600, Y, lab)
     # supplies (right side, clear of the macro box)
     C("devices/vsource.sym", 1030, 510, "name=EVREF value=1.8")
     N(900, 480, 1030, 480, "vref")
@@ -178,5 +220,10 @@ if __name__ == "__main__":
     emit_symbol(pins)
     seq = codes(a.mode)
     tabs = pwl_tables(seq)
+    emit_stepper(seq, tabs)
     emit_tb(pins, seq, tabs)
     emit_deck(seq, tabs)
+    # structural self-check: stepper opin order == sym pin order == tb nets
+    assert [f"b{i}" for i in range(7, -1, -1)] == \
+        [lab for lab in pins if lab.startswith("b")], "pin order drift"
+    print("pin-order self-check OK")
