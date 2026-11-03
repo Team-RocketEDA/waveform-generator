@@ -126,7 +126,7 @@ with sky130A at `~/.local/share/pdk/sky130A`), LibreLane AppRun, Python with
 | `make pex` | extracted-GDS function, 256/256 × 3 modes |
 | `make tbreplay` | flat PWL replay of the RTL golden through the PDK DAC (sine/saw) |
 | `make tbexpand` | visitor tb schematics expand to decks bit-identical to the flat replay (sine/saw run + compare; tri runs) |
-| open `design/analog/xschem/wave_top_tb_sine.sch`, Simulate, Add Wave | visitor demo: hierarchical R2R + stepper, watch `v(vout)`/`v(vfilt)` live |
+| open `design/analog/xschem/wave_top_tb_sine.sch`, Simulate, Ctrl+click the launcher | visitor demo: hierarchical R2R + stepper with an embedded plot — the graph rect renders `v(vout)`/`v(vfilt)` live in the schematic, no Add Wave needed |
 
 Repo map: `rocket.yaml` manifest · `canvas.toml` intent · `design/digital/`
 RTL · `design/analog/` SPICE + xschem + GDS · `tests/` benches ·
