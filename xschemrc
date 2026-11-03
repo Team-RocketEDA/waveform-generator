@@ -1,20 +1,20 @@
 # Project-local xschem init, auto-sourced when xschem starts in this directory.
 # No shell exports needed; just run `xschem <sch>` from here.
 #
-# IMPORTANT: do NOT blindly `append` to XSCHEM_LIBRARY_PATH. If the variable
-# is still unset when this file runs, creating it via `append` suppresses
-# xschem's built-in defaults (its own devices/ library holding ipin, opin,
-# lab_pin) and every pin breaks while PDK symbols resolve. So: restore the
-# install defaults first when unset, then append the PDK library.
+# Library path recipe copied from the vendor file
+# (~/.local/share/pdk/sky130A/libs.tech/xschem/xschemrc): reset, then install
+# xschem's own devices/ library FIRST (ipin/opin/lab_pin live there) plus the
+# PDK symbol dir. The reset is deliberate: a lingering XSCHEM_LIBRARY_PATH
+# export that names only the PDK silently drops the devices library, which is
+# exactly the "devices load, pins don't" failure. PDK dir uses $HOME so this
+# works on any machine with the standard ~/.local/share/pdk layout.
 if {![info exists XSCHEM_SHAREDIR]} {
   set XSCHEM_SHAREDIR /usr/local/share/xschem
 }
-if {![info exists XSCHEM_LIBRARY_PATH] || $XSCHEM_LIBRARY_PATH eq ""} {
-  set XSCHEM_LIBRARY_PATH \
-    $XSCHEM_SHAREDIR/xschem_library:$XSCHEM_SHAREDIR/xschem_library/devices
+set XSCHEM_LIBRARY_PATH {}
+append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library/devices
+append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library
+append XSCHEM_LIBRARY_PATH :$env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
+if {[info exists env(XSCHEM_USER_LIBRARY_PATH)]} {
+  append XSCHEM_LIBRARY_PATH :$env(XSCHEM_USER_LIBRARY_PATH)
 }
-set _pdk_lib $env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
-if {[lsearch -exact [split $XSCHEM_LIBRARY_PATH :] $_pdk_lib] < 0} {
-  append XSCHEM_LIBRARY_PATH :$_pdk_lib
-}
-unset _pdk_lib
