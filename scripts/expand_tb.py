@@ -222,6 +222,9 @@ def expand(top_sch):
     for sym, x, y, attrs in inst:
         if sym == "devices/launcher.sym":
             continue  # GUI-only: spice_ignore=true nets nothing (verified)
+        if sym in ("devices/ipin.sym", "devices/opin.sym"):
+            continue  # top-level net markers; xschem emits *.ipin/*.opin
+            # comments only (pins already joined their nets above)
         if sym in ("devices/code.sym", "devices/code_shown.sym"):
             v = attr(attrs, "value")
             assert v is not None, f"{sym} without value"
@@ -318,6 +321,30 @@ def emit_subckt(sym, sub_sch):
     return out
 
 
+def check_dirs(sym_file, sch_file):
+    """Symbol pin dirs must match sch port types (xschem hard-errors:
+    ipin<->in, opin<->out, iopin<->inout — netlist.c)."""
+    want = {"ipin": "in", "opin": "out", "iopin": "inout"}
+    sym_dirs = {}
+    for line in open(sym_file):
+        m = re.match(r"B \d+ \S+ \S+ \S+ \S+ \{name=([^ }]+) dir=([^ }]+)", line)
+        if m:
+            sym_dirs[m.group(1)] = m.group(2)
+    sch_types = {}
+    for line in open(sch_file):
+        m = re.match(r"C \{devices/(iopin|ipin|opin)\.sym\} \S+ \S+ \d \d "
+                     r"\{name=\S+ lab=([^}]*)\}", line)
+        if m:
+            sch_types[m.group(2)] = m.group(1)
+    assert set(sym_dirs) == set(sch_types), \
+        f"{sym_file.name} pins vs {sch_file.name} ports: " \
+        f"{sorted(set(sym_dirs) ^ set(sch_types))}"
+    bad = [(p, sch_types[p], sym_dirs[p]) for p in sch_types
+           if want[sch_types[p]] != sym_dirs[p]]
+    assert not bad, f"{sym_file.name} direction mismatch (sch-type<->sym-dir): {bad}"
+    print(f"direction OK: {sym_file.name} ({len(sym_dirs)} pins)")
+
+
 if __name__ == "__main__":
     top = Path(sys.argv[1])
     assert top.suffix == ".sch"
@@ -331,6 +358,10 @@ if __name__ == "__main__":
             dports.append(m.group(1))
     assert dpins == dports, f"DAC pin-order mismatch: {dpins} vs {dports}"
     print(f"correspondence OK: r2r_dac8_pdk (13 pins)")
+    check_dirs(XSDIR / "r2r_dac8_pdk.sym", XSDIR / "r2r_dac8_pdk.sch")
+    mode = top.stem.replace("wave_top_tb_", "")
+    check_dirs(XSDIR / f"stair_stepper_{mode}.sym",
+               XSDIR / f"stair_stepper_{mode}.sch")
     sub_defs, top_lines = expand(top)
     L = ["* expanded visitor tb (strict expander, see scripts/expand_tb.py)",
          ".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt",

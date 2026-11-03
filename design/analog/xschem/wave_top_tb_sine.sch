@@ -25,7 +25,9 @@ N 380 630 380 950 {}
 N 350 950 380 950 {}
 N 380 950 420 950 {}
 C {devices/gnd.sym} 350 950 0 0 {name=g1 lab=0}
+C {devices/opin.sym} 520 690 0 0 {name=p_vfilt lab=vfilt}
 N 520 690 600 690 {lab=vfilt}
+C {devices/opin.sym} 520 750 0 0 {name=p_vout lab=vout}
 N 520 750 600 750 {lab=vout}
 C {devices/code.sym} 100 -320 0 0 {name=s_lib value=".lib /home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/ngspice/sky130.lib.spice tt"}
 C {devices/code.sym} 100 -260 0 0 {name=s_tran value=".tran 100p 5.12e-06")}
@@ -49,6 +51,7 @@ save v(vout) v(vfilt) v(b7) v(b0)
 run
 write wave_top_tb_sine.raw
 wrdata wave_top_tb_sine_gui.txt v(vout) v(vfilt)
+plot v(vout) v(vfilt)
 .endc
 "}
 C {devices/launcher.sym} 750 1560 0 0 {name=h1

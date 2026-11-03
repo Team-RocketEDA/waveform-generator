@@ -64,12 +64,15 @@ def pwl_tables(seq):
 
 
 def dac_pins():
-    pins = []  # (lab,) in schematic file order
+    # (lab, sym-dir) in schematic file order. xschem hard-errors on a
+    # direction mismatch (netlist.c: ipin<->in, opin<->out, iopin<->inout),
+    # so the generated .sym must mirror the .sch port types, not inout.
+    pins = []
     for line in open(SCH):
-        m = re.match(r"C \{devices/[io]pin\.sym\} \S+ \S+ 0 0 \{name=\S+ lab=([^}]*)\}",
-                     line)
+        m = re.match(r"C \{devices/([io])pin\.sym\} \S+ \S+ 0 0 "
+                     r"\{name=\S+ lab=([^}]*)\}", line)
         if m:
-            pins.append(m.group(1))
+            pins.append((m.group(2), "in" if m.group(1) == "i" else "out"))
     assert len(pins) == 13, pins
     return pins
 
@@ -82,9 +85,9 @@ def emit_symbol(pins):
          'template="name=X1"}', "V {}", "S {}", "E {}",
          f"L 4 0 0 0 {h} {{}}", f"L 4 0 {h} 300 {h} {{}}",
          f"L 4 300 {h} 300 0 {{}}", f"L 4 300 0 0 0 {{}}"]
-    for i, lab in enumerate(pins):
+    for i, (lab, direction) in enumerate(pins):
         y = 30 + i * ((h - 60) // max(1, n - 1))
-        L.append(f"B 5 -5 {y - 5} 5 {y + 5} {{name={lab} dir=inout}}")
+        L.append(f"B 5 -5 {y - 5} 5 {y + 5} {{name={lab} dir={direction}}}")
     L.append("T {@symname} 150 -25 0 0 0.3 0.3 {}")
     L.append("T {@name} 150 15 0 0 0.2 0.2 {}")
     out = SCH.parent / "r2r_dac8_pdk.sym"
@@ -153,7 +156,7 @@ def emit_stepper(seq, tables):
 
 def emit_tb(pins, seq, tables):
     L = _sch_head()
-    inst_pin_y = {lab: 30 + i * 60 for i, lab in enumerate(pins)}
+    inst_pin_y = {lab: 30 + i * 60 for i, (lab, _) in enumerate(pins)}
 
     def C(sym, x, y, attrs):
         L.append(f"C {{{sym}}} {x} {y} 0 0 {{{attrs}}}")
@@ -191,8 +194,12 @@ def emit_tb(pins, seq, tables):
     N(350, 950, 380, 950)
     N(380, 950, 420, 950)
     C("devices/gnd.sym", 350, 950, "name=g1 lab=0")
-    # probed outputs (stubs; probed, unloaded — same as the batch deck)
+    # probed outputs: each stub ends in an opin, so no net has a single
+    # pin (xschem ERC warns "open net" on those) and the net keeps its
+    # name for .save/graph. Unloaded, same as the batch deck.
+    C("devices/opin.sym", 520, YF, "name=p_vfilt lab=vfilt")
     N(520, YF, 600, YF, "vfilt")
+    C("devices/opin.sym", 520, YO, "name=p_vout lab=vout")
     N(520, YO, 600, YO, "vout")
     # sim directives (verbatim netlist_commands blocks). The .control recipe
     # lives in a VISIBLE code_shown block (foundry-tb pattern) so the
@@ -215,10 +222,14 @@ def emit_tb(pins, seq, tables):
         "y1=0", "y2=1.8", "divy=5", "subdivy=1",
         "node=v(vout) v(vfilt)", "color=4 5", "dataset=-1"])
     L.append(f"B 2 100 1250 700 1650 {{{graph}}}")
+    # plot is LAST (after write/wrdata): one Simulate press runs the sweep
+    # and pops the waves in ngspice's own window, no typing, no Add Wave.
+    # In batch ngspice it degrades to a small ascii plot in the log.
     ctl = "\n".join([
         ".control", "save v(vout) v(vfilt) v(b7) v(b0)", "run",
         f"write wave_top_tb_{a.mode}.raw",
-        f"wrdata wave_top_tb_{a.mode}_gui.txt v(vout) v(vfilt)", ".endc"])
+        f"wrdata wave_top_tb_{a.mode}_gui.txt v(vout) v(vfilt)",
+        "plot v(vout) v(vfilt)", ".endc"])
     C("devices/code_shown.sym", 750, 1250,
       f"name=s_sim only_toplevel=true\nvalue=\"\n{ctl}\n\"")
     C("devices/launcher.sym", 750, 1560,
@@ -266,5 +277,5 @@ if __name__ == "__main__":
     emit_deck(seq, tabs)
     # structural self-check: stepper opin order == sym pin order == tb nets
     assert [f"b{i}" for i in range(7, -1, -1)] == \
-        [lab for lab in pins if lab.startswith("b")], "pin order drift"
+        [lab for lab, _ in pins if lab.startswith("b")], "pin order drift"
     print("pin-order self-check OK")
