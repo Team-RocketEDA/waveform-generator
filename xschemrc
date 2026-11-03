@@ -1,0 +1,5 @@
+# Project-local xschem init, auto-sourced when xschem starts in this directory.
+# Puts the sky130A PDK symbol library on the search path so no shell exports
+# are needed. Appends (never replaces) so xschem's built-in devices/ library
+# and any XSCHEM_LIBRARY_PATH from the environment keep working.
+append XSCHEM_LIBRARY_PATH :/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/xschem

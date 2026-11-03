@@ -64,7 +64,7 @@ results/top_pex.spice:
 
 # PDK ladder path: xschem schematic -> netlist -> 256-code DC sweep (DNL/INL).
 pdkdac:
-	PDK_XSCHEM_LIBRARY_PATH=/home/alrida-ismail/.local/share/pdk/sky130A/libs.tech/xschem xschem -n -o design/analog/xschem/r2r_dac8_pdk.spice -N design/analog/xschem/r2r_dac8_pdk.sch
+	xschem -n -o design/analog/xschem/r2r_dac8_pdk.spice -N design/analog/xschem/r2r_dac8_pdk.sch
 	python3 scripts/pdk_dac_sweep.py
 
 touchcheck:
