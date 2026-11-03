@@ -2,18 +2,15 @@
 
 Yes — for the digital path. `make pex` simulates the flat transistor netlist
 Magic extracts from `stitch_top` (3,224 FETs + 88 node caps, C-only: this
-extract style emits no wire resistors) for 24 clocks at 50 MHz in sine mode,
-thresholds the `b[7:0]` strap nets at 0.9 V, and compares against the RTL
-golden sine codes.
+extract style emits no wire resistors) for 262 clocks at 50 MHz in each of
+sine/saw/tri mode, thresholds the `b[7:0]` strap nets at 0.9 V, and compares
+against the 256-code RTL golden files.
 
-![PEX dout vs RTL golden](../exports/pex_wave.png)
+![PEX dout vs RTL golden, full period per mode](../exports/pex_wave.png)
 
-Result (`results/pex_check.txt`): **20/20 consecutive codes match — PASS.**
-
-```
-sampled: 80 83 86 89 8c 90 93 96 99 9c 9f a2 a5 a8 ab ae b1 b3 b6 b9
-golden : 80 83 86 89 8c 90 93 96 99 9c 9f a2 a5 a8 ab ae b1 b3 b6 b9
-```
+Result (`results/pex_check.txt`): **256/256 per mode — PASS** (shift -4:
+the extracted sim leads the Icarus golden by 4 clocks from TB reset/holdup
+differences; the checker searches shifts -8..+8 modulo the 256-period).
 
 ## What this proves (and does not)
 
@@ -27,7 +24,7 @@ golden : 80 83 86 89 8c 90 93 96 99 9c 9f a2 a5 a8 ab ae b1 b3 b6 b9
 
 ## Reproduce
 
-`scripts/gen_pex_tb.py` writes the deck (sine, step=1, 24 clocks);
+`scripts/gen_pex_tb.py` writes the deck (`--mode sine|saw|tri --nclk 262`);
 `scripts/check_pex.py` checks + plots. The 452 KB extract
 (`results/top_pex.spice`) is regenerable scratch (git-ignored) — see
 `docs/magic_stitch.md` "Parasitic extraction". Two ngspice-42 gotchas are

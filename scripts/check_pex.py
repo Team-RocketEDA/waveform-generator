@@ -45,17 +45,20 @@ for ax, mode in zip(axes, modes):
     # skip reset + stale windows, then cover a full 256 period + margin
     samp = np.array([codes[min(np.searchsorted(t, (k + 0.95) * TPER), len(t) - 1)]
                      for k in range(3, 263)])
-    # golden is one 256-code period; shift search wraps modulo the period
-    best = max(range(5),
+    # golden is one 256-code period; shift search wraps modulo the period.
+    # Sign covers both directions: the extracted sim currently leads the
+    # Icarus golden by ~4 clocks (reset/holdup differences in the TBs).
+    best = max(range(-8, 9),
                key=lambda s: sum(samp[k] == golden[(k + s) % 256]
                                  for k in range(256)))
     match = sum(samp[k] == golden[(k + best) % 256] for k in range(256))
     verdict = "PASS" if match == 256 else "FAIL"
     ok &= verdict == "PASS"
     rep.append(f"{mode}: shift {best}, {match}/256 -> {verdict}")
-    gext = np.concatenate([golden, golden[:4]])
+    gext = np.concatenate([golden, golden])
+    seg = gext[(best % 256):(best % 256) + 256]
     ax.step(np.arange(256), samp[:256], where="post", label=f"PEX b[7:0]")
-    ax.step(np.arange(256), gext[best:best + 256], where="post",
+    ax.step(np.arange(256), seg, where="post",
             linestyle="--", label=f"RTL golden (shift {best})")
     ax.set_ylabel("dout code")
     ax.set_title(f"{mode}: {match}/256 -> {verdict}")
