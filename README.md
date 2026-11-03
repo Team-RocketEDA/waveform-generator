@@ -124,6 +124,8 @@ with sky130A at `~/.local/share/pdk/sky130A`), LibreLane AppRun, Python with
 | `make analoglay` (+ Magic `drc(full)`) | analog macro GDS, DRC 0 |
 | klayout verify scripts (`verify_stitch.py`, `verify_extract.py`) | klayout-side checks: stitch geometry + 8/8 pad extraction |
 | `make pex` | extracted-GDS function, 256/256 × 3 modes |
+| `make tbreplay` | flat PWL replay of the RTL golden through the PDK DAC (sine/saw) |
+| `make tbexpand` | visitor tb schematics expand to decks bit-identical to the flat replay (sine/saw run + compare; tri runs) |
 | open `design/analog/xschem/wave_top_tb_sine.sch`, Simulate, Add Wave | visitor demo: hierarchical R2R + stepper, watch `v(vout)`/`v(vfilt)` live |
 
 Repo map: `rocket.yaml` manifest · `canvas.toml` intent · `design/digital/`
@@ -183,6 +185,7 @@ tools underneath, same evidence out:
 | DNL/INL + waveform + PEX check scripts | `analyze.measurements` (numpy/matplotlib) |
 | yosys synth + LibreLane tapeout | `synthesize.hdl` → `implement.asic` (or `workflow.asic` for the whole ride) |
 | xschem schematic → netlist | `generate.netlist` (adapter: xschem) |
+| hierarchical tb expand + replay compare (`make tbexpand`) | `generate.netlist` (hierarchical) → `simulate.spice` (tran) → `analyze.measurements` (bit-compare vs golden) |
 | PCell R-2R + filter layout | `generate.views` (library: gdsfactory) |
 | `make touchcheck` (xschem verification) | `check.erc` + `check.connectivity` (electrical rules on the schematic) |
 | klayout verify scripts (stitch + extraction) | `check.view_sync` (source vs laid-out vs extracted views, pin mappings) |
