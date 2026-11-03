@@ -75,6 +75,13 @@ touchcheck:
 analoglay:
 	MPLCONFIGDIR=/tmp /tmp/gfsky130/bin/python scripts/gen_analog_layout.py
 
+# Embedded xschem testbench: PWL staircase replay of the RTL golden through
+# the PDK DAC (batch proof of the stimulus chain the GUI replays live).
+tbreplay:
+	python3 scripts/gen_tb_sch.py
+	ngspice -b -o results/tb_replay.log results/tb_wave_top.spice
+	MPLCONFIGDIR=/tmp ../rocket-engine/.venv/bin/python scripts/check_tb_replay.py
+
 arch:
 	@echo "TODO: archify candidate -> docs/architecture/ board"
 	@exit 1
