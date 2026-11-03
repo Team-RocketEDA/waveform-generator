@@ -15,6 +15,9 @@ set XSCHEM_LIBRARY_PATH {}
 append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library/devices
 append XSCHEM_LIBRARY_PATH :${XSCHEM_SHAREDIR}/xschem_library
 append XSCHEM_LIBRARY_PATH :$env(HOME)/.local/share/pdk/sky130A/libs.tech/xschem
+# project-local symbols (r2r_dac8_pdk, stair_stepper_*): xschem searches the
+# library path, NOT the schematic's own directory, so the launch dir rides too
+append XSCHEM_LIBRARY_PATH :[pwd]
 if {[info exists env(XSCHEM_USER_LIBRARY_PATH)]} {
   append XSCHEM_LIBRARY_PATH :$env(XSCHEM_USER_LIBRARY_PATH)
 }
