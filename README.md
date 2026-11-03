@@ -34,6 +34,8 @@ the process together.
 
 ![R-2R + filter schematic map](exports/schematic_map.png)
 
+<p align="center"><em>Fig. 1 — Placement map of <code>r2r_dac8_pdk.sch</code>: 8 bit-slices (b7 top → b0 bottom), TG pairs + inverters per slice, R rungs, shunt taps, RFILT + MiM at right. Blue NMOS, red PMOS, orange poly-R, green cap.</em></p>
+
 `design/analog/xschem/r2r_dac8_pdk.sch` (103 instances, 398 wires) is emitted
 by `scripts/gen_analog_pdk.py`: 8 bit-slices (series-R rung + 2R shunt + W=20
 TG pair + local inverter for the complementary select), vout trunk, RFILT +
@@ -50,11 +52,12 @@ sweep) run with no exports thanks to the project-local `./xschemrc`.
 <td width="68%" valign="top">
 
 <img src="exports/stitch_shot.png" width="100%" alt="stitched top GDS" />
+<p align="center"><em>Fig. 2 — stitched top: digital macro + analog straps.</em></p>
 
 <table>
 <tr>
-<td width="50%" valign="top"><img src="exports/analog_macro_shot.png" width="100%" alt="analog macro GDS" /></td>
-<td width="50%" valign="top"><img src="exports/gds_shot.png" width="100%" alt="digital macro GDS" /></td>
+<td width="50%" valign="top"><img src="exports/analog_macro_shot.png" width="100%" alt="analog macro GDS" /><p align="center"><em>Fig. 3 — analog R-2R + RC macro.</em></p></td>
+<td width="50%" valign="top"><img src="exports/gds_shot.png" width="100%" alt="digital macro GDS" /><p align="center"><em>Fig. 4 — digital waveform_gen macro.</em></p></td>
 </tr>
 </table>
 
@@ -96,10 +99,14 @@ Analog path (ideal SPICE: DAC staircase + filtered output):
 
 ![DAC staircase and filtered output](exports/waveforms.png)
 
+<p align="center"><em>Fig. 5 — Ideal-SPICE sine: DAC staircase (blue) vs RC-filtered output (orange), full period + step detail showing the smoothing.</em></p>
+
 Digital path through extracted silicon (PEX b[7:0] vs RTL golden, full period
 per mode — sine, saw, triangle, all 256/256):
 
 ![PEX full-period vs RTL golden](exports/pex_wave.png)
+
+<p align="center"><em>Fig. 6 — Extracted-transistor simulation vs RTL golden codes: full 256-code periods, sine / saw / triangle, 256/256 each.</em></p>
 
 ## 7. Run, verify, prerequisites
 
