@@ -1,4 +1,10 @@
-# waveform-generator — 8-bit programmable waveform generator
+<p align="center">
+  <img src=".github/assets/rocketide-logo.svg" width="72" height="72" alt="RocketIDE logo">
+</p>
+
+<h1 align="center">waveform-generator — 8-bit programmable waveform generator</h1>
+
+<p align="center"><sub>Part of <a href="https://github.com/Team-RocketEDA/RocketIDE"><b>RocketIDE</b></a> · demo project</sub></p>
 
 ## 1. Summary
 
